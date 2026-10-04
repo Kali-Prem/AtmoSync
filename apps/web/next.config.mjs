@@ -1,3 +1,9 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 function getApiDestination() {
   const rawUrl = (process.env.NEXT_PUBLIC_API_URL || process.env.API_URL || '').trim();
   if (!rawUrl) {
@@ -29,6 +35,13 @@ const nextConfig = {
     workerThreads: false,
     cpus: 1
   },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, 'src')
+    };
+    return config;
+  },
   async rewrites() {
     return [
       {
@@ -40,3 +53,4 @@ const nextConfig = {
 };
 
 export default nextConfig;
+
