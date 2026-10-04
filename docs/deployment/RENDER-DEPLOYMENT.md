@@ -91,7 +91,7 @@ If you prefer deploying services individually through the Render Dashboard, foll
    | `ENVIRONMENT` | `production` | Enables production mode |
    | `PYTHONPATH` | `.` | Ensures proper root import resolution |
    | `DATABASE_URL` | `sqlite:///./data/vayudrishti.db` | Or your Render PostgreSQL URL |
-   | `ALLOWED_CORS_ORIGINS` | `*` | Or specific frontend domain URL |
+   | `ALLOWED_CORS_ORIGINS` | `'["https://atmosync-web.onrender.com", "http://localhost:3000"]'` | JSON array or comma-separated origins (`FRONTEND URL REQUIRED — SET AFTER FRONTEND SERVICE IS CREATED`) |
    | `LOG_LEVEL` | `INFO` | Standard structured logging |
    | `FORECAST_HORIZON_HOURS` | `72` | Standard 72-hour forecast horizon |
 6. Click **Create Web Service**. Note the assigned URL (e.g., `https://atmosync-api.onrender.com`).
@@ -185,7 +185,7 @@ On Render's Free tier, services spin down after 15 minutes of inactivity:
 - **Frontend:** Next.js `npm run start` (`next start`) natively reads `process.env.PORT` on Render, automatically binding to the assigned port.
 
 ### C. Cross-Origin Resource Sharing (CORS)
-- If your frontend cannot communicate with the backend, ensure `ALLOWED_CORS_ORIGINS` on `atmosync-api` includes your frontend domain (or `*`).
+- If your frontend cannot communicate with the backend, ensure `ALLOWED_CORS_ORIGINS` on `atmosync-api` includes your exact deployed frontend URL (e.g. `'["https://atmosync-web.onrender.com", "http://localhost:3000"]'`). Do not use wildcard `*` in production.
 
 ---
 

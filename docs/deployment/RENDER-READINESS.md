@@ -90,7 +90,7 @@ In [`render.yaml`](file:///home/kali-prem/Downloads/SIH-26082/AtmoSync/render.ya
 | `ENVIRONMENT` | `production` | Deployment environment flag |
 | `PYTHONPATH` | `.` | Root directory import resolution |
 | `DATABASE_URL` | `sqlite:///./data/vayudrishti.db` | SQLAlchemy connection string (SQLite or PostgreSQL) |
-| `ALLOWED_CORS_ORIGINS`| `*` | Allowed CORS origins for frontend access |
+| `ALLOWED_CORS_ORIGINS`| `'["https://atmosync-web.onrender.com", "http://localhost:3000"]'` | Allowed production frontend origins (JSON array or comma-separated string) |
 | `LOG_LEVEL` | `INFO` | Logging verbosity |
 | `FORECAST_HORIZON_HOURS` | `72` | Standard forecasting window length |
 

@@ -30,7 +30,7 @@ services:
       - key: DATABASE_URL
         value: sqlite:///./data/vayudrishti.db
       - key: ALLOWED_CORS_ORIGINS
-        value: "*"
+        value: '["https://atmosync-web.onrender.com", "http://localhost:3000"]'
       - key: LOG_LEVEL
         value: INFO
       - key: FORECAST_HORIZON_HOURS
