@@ -202,6 +202,27 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
+  line-height: 0;
+}
+
+.nav-logo-img {
+  height: 44px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  display: block;
+  transition: filter 0.25s ease, opacity 0.2s ease;
+}
+
+[data-theme='dark'] .nav-logo-img {
+  filter: brightness(1.7) contrast(1.1);
+}
+
+@media (max-width: 768px) {
+  .nav-logo-img {
+    height: 36px;
+    max-width: 110px;
+  }
 }
 
 .nav-logo-badge {

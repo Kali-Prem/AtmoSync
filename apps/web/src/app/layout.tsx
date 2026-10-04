@@ -1,11 +1,25 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import ThemeToggle from '@/components/ThemeToggle';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://atmosync-web.onrender.com'),
   title: 'ATMOSYNC — Air Pollution–Weather Coupled Forecasting System for Delhi NCR',
   description: 'ATMOSYNC: 72-Hour Coupled Air Quality & Meteorological Forecasting System for Delhi NCR (SIH-26082)',
+  icons: {
+    icon: [
+      { url: '/icon.png', type: 'image/png' },
+      { url: '/favicon.ico' },
+    ],
+    apple: '/apple-icon.png',
+  },
+  openGraph: {
+    title: 'ATMOSYNC — Air Pollution–Weather Coupled Forecasting System for Delhi NCR',
+    description: '72-Hour Coupled Air Quality & Meteorological Forecasting System for Delhi NCR (SIH-26082)',
+    images: [{ url: '/atmosync-logo.png', width: 1024, height: 372, alt: 'ATMOSYNC' }],
+  },
 };
 
 export default function RootLayout({
@@ -35,12 +49,19 @@ export default function RootLayout({
       <body>
         <nav className="navbar">
           <div className="container nav-inner">
-            <Link href="/" className="nav-brand">
-              <div className="nav-logo-badge">A</div>
-              <div>
-                <div className="nav-title">ATMOSYNC</div>
-                <div className="nav-subtitle">Air Pollution–Weather Coupled Forecasting &bull; SIH-26082</div>
-              </div>
+            <Link
+              href="/"
+              className="nav-brand"
+              aria-label="ATMOSYNC — Air Pollution–Weather Coupled Forecasting System for Delhi NCR"
+            >
+              <Image
+                src="/atmosync-logo.png"
+                alt="ATMOSYNC"
+                width={121}
+                height={44}
+                priority
+                className="nav-logo-img"
+              />
             </Link>
 
             <div className="nav-right-cluster">
