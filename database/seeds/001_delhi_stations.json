@@ -4,20 +4,28 @@
     "name": "Anand Vihar, Delhi - DPCC",
     "region": "Delhi-East",
     "latitude": 28.6476,
-    "longitude": 77.3160,
+    "longitude": 77.316,
     "provider": "DPCC",
     "elevation_m": 213.0,
-    "metadata": { "station_type": "Urban Industrial/Transport", "is_traffic_hotspot": true }
+    "metadata": {
+      "station_type": "Urban Industrial/Transport",
+      "is_traffic_hotspot": true
+    },
+    "is_default_anchor": true
   },
   {
     "station_code": "DL_PUNJABI_BAGH",
     "name": "Punjabi Bagh, Delhi - DPCC",
     "region": "Delhi-West",
-    "latitude": 28.6740,
-    "longitude": 77.1310,
+    "latitude": 28.674,
+    "longitude": 77.131,
     "provider": "DPCC",
     "elevation_m": 218.0,
-    "metadata": { "station_type": "Urban Residential", "is_traffic_hotspot": true }
+    "metadata": {
+      "station_type": "Urban Residential",
+      "is_traffic_hotspot": true
+    },
+    "is_default_anchor": true
   },
   {
     "station_code": "DL_RK_PURAM",
@@ -27,17 +35,25 @@
     "longitude": 77.1869,
     "provider": "DPCC",
     "elevation_m": 222.0,
-    "metadata": { "station_type": "Urban Residential", "is_traffic_hotspot": false }
+    "metadata": {
+      "station_type": "Urban Residential",
+      "is_traffic_hotspot": false
+    },
+    "is_default_anchor": true
   },
   {
     "station_code": "DL_IGI_AIRPORT",
     "name": "IGI Airport (T3), Delhi - IMD",
     "region": "Delhi-SouthWest",
-    "latitude": 28.5620,
-    "longitude": 77.0940,
+    "latitude": 28.562,
+    "longitude": 77.094,
     "provider": "IMD",
     "elevation_m": 228.0,
-    "metadata": { "station_type": "Airport / Commercial", "is_traffic_hotspot": true }
+    "metadata": {
+      "station_type": "Airport / Commercial",
+      "is_traffic_hotspot": true
+    },
+    "is_default_anchor": true
   },
   {
     "station_code": "DL_BAWANA",
@@ -47,7 +63,11 @@
     "longitude": 77.0511,
     "provider": "DPCC",
     "elevation_m": 215.0,
-    "metadata": { "station_type": "Industrial Area", "is_traffic_hotspot": true }
+    "metadata": {
+      "station_type": "Industrial Area",
+      "is_traffic_hotspot": true
+    },
+    "is_default_anchor": true
   },
   {
     "station_code": "DL_JAHANGIRPURI",
@@ -57,7 +77,11 @@
     "longitude": 77.1706,
     "provider": "DPCC",
     "elevation_m": 216.0,
-    "metadata": { "station_type": "Industrial / Residential", "is_traffic_hotspot": true }
+    "metadata": {
+      "station_type": "Industrial / Residential",
+      "is_traffic_hotspot": true
+    },
+    "is_default_anchor": false
   },
   {
     "station_code": "DL_MANDIR_MARG",
@@ -67,17 +91,25 @@
     "longitude": 77.2011,
     "provider": "DPCC",
     "elevation_m": 220.0,
-    "metadata": { "station_type": "Urban Institutional", "is_traffic_hotspot": false }
+    "metadata": {
+      "station_type": "Urban Institutional",
+      "is_traffic_hotspot": false
+    },
+    "is_default_anchor": false
   },
   {
     "station_code": "DL_DWARKA_SEC8",
     "name": "Dwarka Sector 8, Delhi - DPCC",
     "region": "Delhi-SouthWest",
-    "latitude": 28.5710,
+    "latitude": 28.571,
     "longitude": 77.0719,
     "provider": "DPCC",
     "elevation_m": 224.0,
-    "metadata": { "station_type": "Urban Residential", "is_traffic_hotspot": false }
+    "metadata": {
+      "station_type": "Urban Residential",
+      "is_traffic_hotspot": false
+    },
+    "is_default_anchor": false
   },
   {
     "station_code": "DL_OKHLA_PH2",
@@ -87,7 +119,11 @@
     "longitude": 77.2712,
     "provider": "DPCC",
     "elevation_m": 214.0,
-    "metadata": { "station_type": "Industrial Area", "is_traffic_hotspot": true }
+    "metadata": {
+      "station_type": "Industrial Area",
+      "is_traffic_hotspot": true
+    },
+    "is_default_anchor": false
   },
   {
     "station_code": "DL_WAZIRPUR",
@@ -97,7 +133,11 @@
     "longitude": 77.1655,
     "provider": "DPCC",
     "elevation_m": 217.0,
-    "metadata": { "station_type": "Industrial Area", "is_traffic_hotspot": true }
+    "metadata": {
+      "station_type": "Industrial Area",
+      "is_traffic_hotspot": true
+    },
+    "is_default_anchor": false
   },
   {
     "station_code": "DL_LODHI_ROAD",
@@ -107,7 +147,11 @@
     "longitude": 77.2217,
     "provider": "IMD",
     "elevation_m": 219.0,
-    "metadata": { "station_type": "Urban Background / Institutional", "is_traffic_hotspot": false }
+    "metadata": {
+      "station_type": "Urban Background / Institutional",
+      "is_traffic_hotspot": false
+    },
+    "is_default_anchor": false
   },
   {
     "station_code": "DL_SIRI_FORT",
@@ -117,7 +161,11 @@
     "longitude": 77.2159,
     "provider": "CPCB",
     "elevation_m": 221.0,
-    "metadata": { "station_type": "Urban Residential", "is_traffic_hotspot": false }
+    "metadata": {
+      "station_type": "Urban Residential",
+      "is_traffic_hotspot": false
+    },
+    "is_default_anchor": false
   },
   {
     "station_code": "DL_ROHINI_SEC16",
@@ -127,7 +175,11 @@
     "longitude": 77.1199,
     "provider": "DPCC",
     "elevation_m": 216.0,
-    "metadata": { "station_type": "Urban Residential", "is_traffic_hotspot": false }
+    "metadata": {
+      "station_type": "Urban Residential",
+      "is_traffic_hotspot": false
+    },
+    "is_default_anchor": false
   },
   {
     "station_code": "DL_ASHOK_VIHAR",
@@ -137,7 +189,11 @@
     "longitude": 77.1816,
     "provider": "DPCC",
     "elevation_m": 217.0,
-    "metadata": { "station_type": "Urban Residential", "is_traffic_hotspot": false }
+    "metadata": {
+      "station_type": "Urban Residential",
+      "is_traffic_hotspot": false
+    },
+    "is_default_anchor": false
   },
   {
     "station_code": "DL_NAJAFGARH",
@@ -147,17 +203,25 @@
     "longitude": 76.9338,
     "provider": "DPCC",
     "elevation_m": 216.0,
-    "metadata": { "station_type": "Rural / Semi-Urban", "is_traffic_hotspot": false }
+    "metadata": {
+      "station_type": "Rural / Semi-Urban",
+      "is_traffic_hotspot": false
+    },
+    "is_default_anchor": false
   },
   {
     "station_code": "UP_NOIDA_SEC62",
     "name": "Sector 62, Noida - UPPCB",
     "region": "UP-NCR",
     "latitude": 28.6245,
-    "longitude": 77.3650,
+    "longitude": 77.365,
     "provider": "UPPCB",
     "elevation_m": 211.0,
-    "metadata": { "station_type": "Commercial / Institutional", "is_traffic_hotspot": true }
+    "metadata": {
+      "station_type": "Commercial / Institutional",
+      "is_traffic_hotspot": true
+    },
+    "is_default_anchor": false
   },
   {
     "station_code": "UP_GHAZIABAD_VASUNDHARA",
@@ -167,7 +231,11 @@
     "longitude": 77.3573,
     "provider": "UPPCB",
     "elevation_m": 212.0,
-    "metadata": { "station_type": "Urban Residential / Industrial", "is_traffic_hotspot": true }
+    "metadata": {
+      "station_type": "Urban Residential / Industrial",
+      "is_traffic_hotspot": true
+    },
+    "is_default_anchor": false
   },
   {
     "station_code": "HR_GURUGRAM_SEC51",
@@ -177,7 +245,11 @@
     "longitude": 77.0818,
     "provider": "HSPCB",
     "elevation_m": 226.0,
-    "metadata": { "station_type": "Urban Residential", "is_traffic_hotspot": true }
+    "metadata": {
+      "station_type": "Urban Residential",
+      "is_traffic_hotspot": true
+    },
+    "is_default_anchor": false
   },
   {
     "station_code": "HR_FARIDABAD_NIT",
@@ -187,7 +259,11 @@
     "longitude": 77.3032,
     "provider": "HSPCB",
     "elevation_m": 215.0,
-    "metadata": { "station_type": "Industrial Area", "is_traffic_hotspot": true }
+    "metadata": {
+      "station_type": "Industrial Area",
+      "is_traffic_hotspot": true
+    },
+    "is_default_anchor": false
   },
   {
     "station_code": "DL_AYA_NAGAR",
@@ -197,6 +273,58 @@
     "longitude": 77.1099,
     "provider": "IMD",
     "elevation_m": 235.0,
-    "metadata": { "station_type": "Meteorological Baseline / Semi-Rural", "is_traffic_hotspot": false }
+    "metadata": {
+      "station_type": "Meteorological Baseline / Semi-Rural",
+      "is_traffic_hotspot": false
+    },
+    "is_default_anchor": false
+  },
+  {
+    "station_code": "DL_MAJOR_DHYAN_CHAND",
+    "name": "Major Dhyan Chand National Stadium, Delhi - DPCC",
+    "region": "Delhi-Central",
+    "latitude": 28.6119,
+    "longitude": 77.2372,
+    "provider": "DPCC",
+    "elevation_m": 215.0,
+    "is_default_anchor": false,
+    "metadata": {
+      "station_type": "Urban Background / Sports Complex",
+      "is_experimental": true,
+      "category": "experimental",
+      "is_traffic_hotspot": false
+    }
+  },
+  {
+    "station_code": "DL_ALIPUR",
+    "name": "Alipur, Delhi - DPCC",
+    "region": "Delhi-North",
+    "latitude": 28.8153,
+    "longitude": 77.153,
+    "provider": "DPCC",
+    "elevation_m": 216.0,
+    "is_default_anchor": false,
+    "metadata": {
+      "station_type": "Semi-Urban / Agricultural Boundary",
+      "is_experimental": true,
+      "category": "experimental",
+      "is_traffic_hotspot": false
+    }
+  },
+  {
+    "station_code": "DL_VIVEK_VIHAR",
+    "name": "Vivek Vihar, Delhi - DPCC",
+    "region": "Delhi-East",
+    "latitude": 28.6723,
+    "longitude": 77.3153,
+    "provider": "DPCC",
+    "elevation_m": 214.0,
+    "is_default_anchor": false,
+    "metadata": {
+      "station_type": "Urban Residential",
+      "is_experimental": true,
+      "category": "experimental",
+      "is_traffic_hotspot": true
+    }
   }
 ]

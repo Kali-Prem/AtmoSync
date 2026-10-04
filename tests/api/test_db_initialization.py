@@ -60,7 +60,7 @@ def test_seed_lifecycle_and_idempotence():
 
         with Session() as session:
             inserted = seed_monitoring_stations(session)
-            assert inserted == 20, f"Expected 20 stations inserted, got {inserted}"
+            assert inserted >= 20, f"Expected at least 20 stations inserted, got {inserted}"
 
             # Verify locations populated
             loc_count = session.query(Location).count()
@@ -68,18 +68,19 @@ def test_seed_lifecycle_and_idempotence():
 
             # Verify stations populated
             stn_count = session.query(MonitoringStation).count()
-            assert stn_count == 20, f"Expected 20 monitoring stations, got {stn_count}"
+            assert stn_count >= 20, f"Expected at least 20 monitoring stations, got {stn_count}"
 
             # Verify specific anchor station
             anand_vihar = session.query(MonitoringStation).filter_by(station_code="DL_ANAND_VIHAR").first()
             assert anand_vihar is not None
             assert anand_vihar.location_id is not None
+            assert anand_vihar.is_default_anchor is True
 
         # Verify idempotence on second run
         with Session() as session:
             second_run = seed_monitoring_stations(session)
             assert second_run == 0, f"Expected 0 new stations on second run, got {second_run}"
-            assert session.query(MonitoringStation).count() == 20
+            assert session.query(MonitoringStation).count() == stn_count
     finally:
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
@@ -98,7 +99,7 @@ def test_seed_on_uninitialized_database_recovery():
         with Session() as session:
             # This previously raised sqlite3.OperationalError: no such table: locations
             inserted = seed_monitoring_stations(session)
-            assert inserted == 20
+            assert inserted >= 20
     finally:
         if os.path.exists(tmp_path):
             os.remove(tmp_path)

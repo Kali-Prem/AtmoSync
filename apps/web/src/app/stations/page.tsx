@@ -1,4 +1,5 @@
 import { fetchStations } from '@/lib/api';
+import { StationsRegistryTable } from '@/components';
 
 export const dynamic = 'force-dynamic';
 
@@ -27,44 +28,7 @@ export default async function StationsPage() {
           </div>
         </div>
       ) : (
-        <div className="glass-panel" style={{ overflowX: 'auto', padding: '0.5rem' }}>
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Station Code</th>
-                <th>Station Name</th>
-                <th>Provider</th>
-                <th>Coordinates</th>
-                <th>Elevation</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {stations.map((stn) => (
-                <tr key={stn.id}>
-                  <td style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)', fontWeight: 600 }}>
-                    {stn.station_code}
-                  </td>
-                  <td style={{ fontWeight: 600 }}>
-                    {stn.name}
-                  </td>
-                  <td>
-                    <span className="badge badge-info">{stn.provider}</span>
-                  </td>
-                  <td style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)', fontSize: '0.82rem' }}>
-                    {stn.latitude != null ? stn.latitude.toFixed(4) : '—'}°N, {stn.longitude != null ? stn.longitude.toFixed(4) : '—'}°E
-                  </td>
-                  <td style={{ color: 'var(--text-secondary)' }}>
-                    {stn.elevation_m} m ASL
-                  </td>
-                  <td>
-                    <span className="badge badge-success">{stn.status}</span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <StationsRegistryTable stations={stations} />
       )}
     </div>
   );

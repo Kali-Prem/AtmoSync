@@ -1,14 +1,16 @@
 import Link from 'next/link';
-import { fetchHealth, fetchInversionStatus, fetchLatestObservations, fetchDataFreshness } from '@/lib/api';
+import { fetchHealth, fetchInversionStatus, fetchLatestObservations, fetchDataFreshness, fetchStations } from '@/lib/api';
+import { StationTelemetryTable } from '@/components';
 
 export const dynamic = 'force-dynamic';
 
 export default async function DashboardPage() {
-  const [health, inversion, latestObs, freshness] = await Promise.all([
+  const [health, inversion, latestObs, freshness, stations] = await Promise.all([
     fetchHealth(),
     fetchInversionStatus(),
     fetchLatestObservations(),
-    fetchDataFreshness()
+    fetchDataFreshness(),
+    fetchStations()
   ]);
 
   return (
@@ -115,82 +117,8 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Real Observations Table */}
-      <div style={{ marginBottom: '2.5rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 700 }}>Anchor Monitoring Stations — Real Ground Telemetry</h2>
-          <Link href="/forecast" style={{ color: 'var(--accent-cyan)', fontSize: '0.875rem', textDecoration: 'none' }}>
-            View 72-Hour Predictions &rarr;
-          </Link>
-        </div>
-
-        <div className="glass-panel" style={{ overflowX: 'auto', padding: '0.5rem' }}>
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Station</th>
-                <th>Latest PM2.5</th>
-                <th>PM10</th>
-                <th>NO2</th>
-                <th>Temp</th>
-                <th>Wind Speed</th>
-                <th>PBL Height</th>
-                <th>Trapping Index (ITSI)</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {latestObs?.records && latestObs.records.length > 0 ? (
-                latestObs.records.map((rec) => (
-                  <tr key={rec.station_code}>
-                    <td style={{ fontWeight: 600 }}>
-                      {rec.station_name}
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{rec.station_code}</div>
-                    </td>
-                    <td style={{ fontWeight: 700, color: rec.pm25 > 120 ? 'var(--naqi-very-poor)' : rec.pm25 > 60 ? 'var(--naqi-moderate)' : 'var(--naqi-good)' }}>
-                      {rec.pm25} µg/m³
-                    </td>
-                    <td>{rec.pm10} µg/m³</td>
-                    <td>{rec.no2} µg/m³</td>
-                    <td>{rec.temp_c} °C</td>
-                    <td>{rec.wind_speed_ms} m/s</td>
-                    <td>{rec.pblh_m} m</td>
-                    <td>
-                      <span className="badge badge-warning">{rec.itsi} / 100</span>
-                    </td>
-                    <td>
-                      <Link 
-                        href={`/forecast?station=${rec.station_code}`}
-                        style={{ color: 'var(--accent-cyan)', fontSize: '0.82rem', fontWeight: 600, textDecoration: 'none' }}
-                      >
-                        Forecast &rarr;
-                      </Link>
-                    </td>
-                  </tr>
-                ))
-              ) : latestObs?.status === 'EMPTY' ? (
-                <tr>
-                  <td colSpan={9} style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-                    No station telemetry records currently recorded in database. Awaiting telemetry ingestion cycle.
-                  </td>
-                </tr>
-              ) : !latestObs ? (
-                <tr>
-                  <td colSpan={9} style={{ padding: '2rem', textAlign: 'center', color: 'var(--accent-ruby, #ef4444)' }}>
-                    Unable to connect to ATMOSYNC API. Please verify backend service health.
-                  </td>
-                </tr>
-              ) : (
-                <tr>
-                  <td colSpan={9} style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-                    No station telemetry records available.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      {/* Real Observations Table & Station Discovery Controls */}
+      <StationTelemetryTable stations={stations} latestObs={latestObs} />
 
       {/* Navigation Quick Links */}
       <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>

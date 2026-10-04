@@ -5,7 +5,7 @@ Compatible with PostgreSQL / TimescaleDB and SQLite (for unit tests).
 from datetime import datetime
 from typing import Optional, Dict, Any
 from sqlalchemy import (
-    String, Float, Integer, Text, DateTime, ForeignKey, Index, JSON
+    String, Float, Integer, Text, DateTime, ForeignKey, Index, JSON, Boolean
 )
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
@@ -38,6 +38,7 @@ class MonitoringStation(Base):
     provider: Mapped[str] = mapped_column(String(64), default="CPCB")
     status: Mapped[str] = mapped_column(String(32), default="ACTIVE")
     elevation_m: Mapped[float] = mapped_column(Float, default=215.0)
+    is_default_anchor: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
     extra_metadata: Mapped[Optional[Dict[str, Any]]] = mapped_column(JSON, default=dict)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 

@@ -34,6 +34,34 @@ def test_get_stations(client):
     assert len(stations) >= 20
     assert any(s["station_code"] == "DL_ANAND_VIHAR" for s in stations)
 
+def test_station_discovery_enhancement_and_anchors(client):
+    """Verifies anchor visibility, experimental stations, and filtering."""
+    # 1. Full registry contains at least 23 stations
+    res = client.get("/api/v1/locations/stations")
+    assert res.status_code == 200
+    stations = res.json()
+    assert len(stations) >= 23
+
+    # 2. Verify 5 anchor stations have is_default_anchor == True
+    expected_anchors = {"DL_ANAND_VIHAR", "DL_PUNJABI_BAGH", "DL_RK_PURAM", "DL_IGI_AIRPORT", "DL_BAWANA"}
+    found_anchors = {s["station_code"] for s in stations if s.get("is_default_anchor") is True}
+    assert expected_anchors.issubset(found_anchors), f"Missing anchors: {expected_anchors - found_anchors}"
+
+    # 3. Verify experimental stations exist and have is_default_anchor == False
+    exp_codes = {"DL_MAJOR_DHYAN_CHAND", "DL_ALIPUR", "DL_VIVEK_VIHAR"}
+    stn_map = {s["station_code"]: s for s in stations}
+    for code in exp_codes:
+        assert code in stn_map, f"Experimental station {code} missing from registry"
+        assert stn_map[code].get("is_default_anchor") is False
+        assert stn_map[code].get("extra_metadata", {}).get("is_experimental") is True
+
+    # 4. Verify filtered endpoint for anchors
+    res_anchors = client.get("/api/v1/locations/stations?is_default_anchor=true")
+    assert res_anchors.status_code == 200
+    anchor_stations = res_anchors.json()
+    assert len(anchor_stations) == 5
+    assert {s["station_code"] for s in anchor_stations} == expected_anchors
+
 def test_get_inversion_status(client):
     res = client.get("/api/v1/inversion/status")
     assert res.status_code == 200

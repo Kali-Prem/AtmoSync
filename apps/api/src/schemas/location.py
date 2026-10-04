@@ -29,6 +29,7 @@ class MonitoringStationBase(BaseModel):
     provider: str = "CPCB"
     status: str = "ACTIVE"
     elevation_m: float = 215.0
+    is_default_anchor: bool = False
     extra_metadata: Optional[Dict[str, Any]] = None
 
 class MonitoringStationRead(MonitoringStationBase):
