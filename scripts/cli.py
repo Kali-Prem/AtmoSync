@@ -21,6 +21,7 @@ import argparse
 import logging
 from database.connection import init_database, SessionLocal
 from database.seed_data import seed_monitoring_stations
+from database.seed_phase5 import seed_database as seed_phase5_database
 from services.ingestion.src.pipeline import IngestionPipeline
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
@@ -38,6 +39,9 @@ def cmd_db_seed(args):
     with SessionLocal() as db:
         count = seed_monitoring_stations(db)
         logger.info(f"Successfully seeded {count} stations.")
+    logger.info("Seeding Phase 5 observations and active fire events...")
+    seed_phase5_database()
+    logger.info("Database seeding completed.")
 
 def cmd_ingest_weather(args):
     pipeline = IngestionPipeline()

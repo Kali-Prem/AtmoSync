@@ -134,113 +134,62 @@ export interface ModelMetadata {
   benchmark_evaluation: Record<string, Record<string, Record<string, number>>>;
 }
 
-export async function fetchHealth(): Promise<SystemHealth | null> {
+async function safeApiFetch<T>(endpoint: string, options: RequestInit = {}): Promise<T | null> {
+  const url = `${API_BASE_URL}${endpoint}`;
+  const method = options.method || "GET";
   try {
-    const res = await fetch(`${API_BASE_URL}/health`, { cache: "no-store" });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (err) {
-    console.error("Failed to connect to ATMOSYNC API:", err);
+    const res = await fetch(url, { ...options, cache: "no-store" });
+    if (!res.ok) {
+      console.warn(`[ATMOSYNC API] ${method} ${url} -> HTTP ${res.status} ${res.statusText}`);
+      return null;
+    }
+    const data = await res.json();
+    return data as T;
+  } catch (err: any) {
+    console.error(`[ATMOSYNC API] Network/Fetch Error: ${method} ${url}:`, err?.message || err);
     return null;
   }
+}
+
+export async function fetchHealth(): Promise<SystemHealth | null> {
+  return safeApiFetch<SystemHealth>("/health");
 }
 
 export async function fetchStations(): Promise<MonitoringStation[]> {
-  try {
-    const res = await fetch(`${API_BASE_URL}/api/v1/locations/stations`, { cache: "no-store" });
-    if (!res.ok) return [];
-    return await res.json();
-  } catch (err) {
-    console.error("Failed to fetch stations:", err);
-    return [];
-  }
+  const res = await safeApiFetch<MonitoringStation[]>("/api/v1/locations/stations");
+  return res || [];
 }
 
 export async function fetchInversionStatus(): Promise<InversionStatus | null> {
-  try {
-    const res = await fetch(`${API_BASE_URL}/api/v1/inversion/status`, { cache: "no-store" });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (err) {
-    console.error("Failed to fetch inversion status:", err);
-    return null;
-  }
+  return safeApiFetch<InversionStatus>("/api/v1/inversion/status");
 }
 
 export async function fetchStationForecast(stationCode: string): Promise<StationForecastResponse | null> {
-  try {
-    const res = await fetch(`${API_BASE_URL}/api/v1/forecasts/stations/${stationCode}`, { cache: "no-store" });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (err) {
-    console.error(`Failed to fetch forecast for ${stationCode}:`, err);
-    return null;
-  }
+  return safeApiFetch<StationForecastResponse>(`/api/v1/forecasts/stations/${encodeURIComponent(stationCode)}`);
 }
 
 export async function fetchLatestObservations(): Promise<LatestObservationsResponse | null> {
-  try {
-    const res = await fetch(`${API_BASE_URL}/api/v1/observations/latest`, { cache: "no-store" });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (err) {
-    console.error("Failed to fetch latest observations:", err);
-    return null;
-  }
+  return safeApiFetch<LatestObservationsResponse>("/api/v1/observations/latest");
 }
 
 export async function fetchDataFreshness(): Promise<DataFreshness | null> {
-  try {
-    const res = await fetch(`${API_BASE_URL}/api/v1/forecasts/freshness`, { cache: "no-store" });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (err) {
-    console.error("Failed to fetch data freshness:", err);
-    return null;
-  }
+  return safeApiFetch<DataFreshness>("/api/v1/forecasts/freshness");
 }
 
 export async function fetchModelMetadata(): Promise<ModelMetadata | null> {
-  try {
-    const res = await fetch(`${API_BASE_URL}/api/v1/forecasts/models`, { cache: "no-store" });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (err) {
-    console.error("Failed to fetch model metadata:", err);
-    return null;
-  }
+  return safeApiFetch<ModelMetadata>("/api/v1/forecasts/models");
 }
 
 export async function fetchAtmosphereCurrent(): Promise<any | null> {
-  try {
-    const res = await fetch(`${API_BASE_URL}/api/v1/atmosphere/current`, { cache: "no-store" });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (err) {
-    console.error("Failed to fetch atmosphere:", err);
-    return null;
-  }
+  return safeApiFetch<any>("/api/v1/atmosphere/current");
 }
 
 export async function fetchFireClusters(): Promise<any | null> {
-  try {
-    const res = await fetch(`${API_BASE_URL}/api/v1/fires/clusters`, { cache: "no-store" });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (err) {
-    console.error("Failed to fetch fire clusters:", err);
-    return null;
-  }
+  return safeApiFetch<any>("/api/v1/fires/clusters");
 }
 
 export async function fetchPlumeRisk(): Promise<any | null> {
-  try {
-    const res = await fetch(`${API_BASE_URL}/api/v1/plume/risk`, { cache: "no-store" });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (err) {
-    console.error("Failed to fetch plume risk:", err);
-    return null;
-  }
+  return safeApiFetch<any>("/api/v1/plume/risk");
 }
+
 

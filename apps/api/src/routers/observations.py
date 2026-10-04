@@ -15,36 +15,74 @@ from apps.api.src.schemas.observation import AirQualityObservationRead, WeatherO
 
 router = APIRouter(prefix="/observations", tags=["Observations"])
 
-PROCESSED_FILE = Path(__file__).resolve().parent.parent.parent.parent.parent / "data" / "processed" / "delhi_ncr_winter_2023_2024.csv"
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent.parent
+PROCESSED_FILE = REPO_ROOT / "data" / "processed" / "delhi_ncr_winter_2023_2024.csv"
+FEATURES_FILE = REPO_ROOT / "data" / "features" / "delhi_ncr_features.csv"
+
+
+def get_observation_dataframe() -> Optional[pd.DataFrame]:
+    """Resolves processed observation dataset from primary or features fallback paths."""
+    if PROCESSED_FILE.exists():
+        return pd.read_csv(PROCESSED_FILE)
+    if FEATURES_FILE.exists():
+        return pd.read_csv(FEATURES_FILE)
+    return None
 
 
 @router.get("/latest")
-def get_latest_observations():
+def get_latest_observations(db: Session = Depends(get_db)):
     """Returns the latest observed criteria pollutants and meteorology across anchor stations."""
-    if not PROCESSED_FILE.exists():
+    df = get_observation_dataframe()
+    if df is not None and not df.empty:
+        latest_records = []
+        for stn_code, grp in df.groupby("station_code"):
+            grp = grp.sort_values("timestamp_utc")
+            row = grp.iloc[-1]
+            latest_records.append({
+                "station_code": stn_code,
+                "station_name": row.get("station_name", stn_code),
+                "timestamp_utc": str(row["timestamp_utc"]),
+                "pm25": round(float(row["pm25_ugm3"]), 1),
+                "pm10": round(float(row["pm10_ugm3"]), 1),
+                "no2": round(float(row["no2_ugm3"]), 1),
+                "so2": round(float(row["so2_ugm3"]), 1),
+                "co_mgm3": round(float(row["co_mgm3"]), 2),
+                "o3": round(float(row["o3_ugm3"]), 1),
+                "temp_c": round(float(row["temp_2m_c"]), 1),
+                "rh_pct": round(float(row["rh_2m_pct"]), 1),
+                "wind_speed_ms": round(float(row["wind_speed_10m_ms"]), 1),
+                "pblh_m": round(float(row["pblh_m"]), 0),
+                "itsi": round(float(row["itsi"]), 1)
+            })
+        return {"status": "SUCCESS", "stations_count": len(latest_records), "records": latest_records}
+
+    # Fallback to database queries
+    aq_records = db.query(AirQualityObservation).order_by(AirQualityObservation.time.desc()).limit(20).all()
+    if not aq_records:
         return {"status": "EMPTY", "message": "No observation data available."}
 
-    df = pd.read_csv(PROCESSED_FILE)
     latest_records = []
-    for stn_code, grp in df.groupby("station_code"):
-        grp.sort_values("timestamp_utc", inplace=True)
-        row = grp.iloc[-1]
-        latest_records.append({
-            "station_code": stn_code,
-            "station_name": row.get("station_name", stn_code),
-            "timestamp_utc": row["timestamp_utc"],
-            "pm25": round(float(row["pm25_ugm3"]), 1),
-            "pm10": round(float(row["pm10_ugm3"]), 1),
-            "no2": round(float(row["no2_ugm3"]), 1),
-            "so2": round(float(row["so2_ugm3"]), 1),
-            "co_mgm3": round(float(row["co_mgm3"]), 2),
-            "o3": round(float(row["o3_ugm3"]), 1),
-            "temp_c": round(float(row["temp_2m_c"]), 1),
-            "rh_pct": round(float(row["rh_2m_pct"]), 1),
-            "wind_speed_ms": round(float(row["wind_speed_10m_ms"]), 1),
-            "pblh_m": round(float(row["pblh_m"]), 0),
-            "itsi": round(float(row["itsi"]), 1)
-        })
+    seen = set()
+    for aq in aq_records:
+        if aq.station_id not in seen:
+            seen.add(aq.station_id)
+            w = db.query(WeatherObservation).filter(WeatherObservation.time == aq.time).first()
+            latest_records.append({
+                "station_code": aq.station_id.replace("stn_", "").upper(),
+                "station_name": aq.station_id.replace("stn_", "").replace("_", " ").title(),
+                "timestamp_utc": aq.time.isoformat(),
+                "pm25": round(float(aq.pm25 or 0), 1),
+                "pm10": round(float(aq.pm10 or 0), 1),
+                "no2": round(float(aq.no2 or 0), 1),
+                "so2": round(float(aq.so2 or 0), 1),
+                "co_mgm3": round(float(aq.co or 0), 2),
+                "o3": round(float(aq.o3 or 0), 1),
+                "temp_c": round(float(w.temperature_2m if w else 20.0), 1),
+                "rh_pct": round(float(w.relative_humidity_2m if w else 50.0), 1),
+                "wind_speed_ms": round(float(w.wind_speed_10m if w else 2.0), 1),
+                "pblh_m": round(float(w.boundary_layer_height_m if w else 300.0), 0),
+                "itsi": round(float(w.lapse_rate_low * 20 if w and w.lapse_rate_low else 35.0), 1)
+            })
     return {"status": "SUCCESS", "stations_count": len(latest_records), "records": latest_records}
 
 
@@ -54,10 +92,10 @@ def get_station_observation_history(
     limit: int = Query(48, ge=1, le=500)
 ):
     """Returns historical hourly time series for a station."""
-    if not PROCESSED_FILE.exists():
+    df = get_observation_dataframe()
+    if df is None or df.empty:
         raise HTTPException(status_code=404, detail="Historical dataset not found.")
 
-    df = pd.read_csv(PROCESSED_FILE)
     stn_df = df[df["station_code"] == station_id].copy()
     if stn_df.empty:
         raise HTTPException(status_code=404, detail=f"Station '{station_id}' not found.")

@@ -216,8 +216,7 @@ export default async function ForecastPage({ searchParams }: PageProps) {
           <div className="empty-icon">&#9888;</div>
           <div className="empty-title">Forecast Data Unavailable for {selectedStation}</div>
           <div className="empty-desc">
-            The backend forecasting service did not return predictions for this station identifier.
-            Ensure the FastAPI server is running at <code>http://localhost:8000</code> and the Phase 4 training pipeline has been executed.
+            Ensure the backend API service is operational and the forecasting models are loaded.
           </div>
         </div>
       )}

@@ -168,10 +168,22 @@ export default async function DashboardPage() {
                     </td>
                   </tr>
                 ))
+              ) : latestObs?.status === 'EMPTY' ? (
+                <tr>
+                  <td colSpan={9} style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                    No station telemetry records currently recorded in database. Awaiting telemetry ingestion cycle.
+                  </td>
+                </tr>
+              ) : !latestObs ? (
+                <tr>
+                  <td colSpan={9} style={{ padding: '2rem', textAlign: 'center', color: 'var(--accent-ruby, #ef4444)' }}>
+                    Unable to connect to ATMOSYNC API. Please verify backend service health.
+                  </td>
+                </tr>
               ) : (
                 <tr>
                   <td colSpan={9} style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-                    Loading real station telemetry...
+                    No station telemetry records available.
                   </td>
                 </tr>
               )}

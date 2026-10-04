@@ -124,7 +124,7 @@ export default async function AtmospherePage() {
                     <td style={{ padding: '0.75rem 1rem', fontWeight: 600 }}>
                       {stn.location_id?.replace('loc_', '').replace('_', ' ').toUpperCase()}
                       <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-                        {stn.latitude.toFixed(2)}°N, {stn.longitude.toFixed(2)}°E
+                        {stn.latitude != null ? stn.latitude.toFixed(2) : '—'}°N, {stn.longitude != null ? stn.longitude.toFixed(2) : '—'}°E
                       </div>
                     </td>
                     <td style={{ padding: '0.75rem 1rem', fontFamily: 'var(--font-mono)' }}>{stn.temperature_2m_c} °C</td>

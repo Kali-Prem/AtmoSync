@@ -23,6 +23,58 @@ def get_current_atmosphere(db: Session = Depends(get_db)):
     """
     latest_obs = db.query(WeatherObservation).order_by(WeatherObservation.time.desc()).limit(5).all()
     if not latest_obs:
+        from apps.api.src.routers.observations import get_observation_dataframe
+        df = get_observation_dataframe()
+        if df is not None and not df.empty:
+            stations_data = []
+            for stn_code, grp in df.groupby("station_code"):
+                row = grp.sort_values("timestamp_utc").iloc[-1]
+                pblh = float(row.get("pblh_m", 250.0) or 250.0)
+                ws = float(row.get("wind_speed_10m_ms", 2.0) or 2.0)
+                wdir = float(row.get("wind_direction_10m_deg", 315.0) or 315.0)
+                disp = PBLDiagnostics.compute_dispersion_capacity(pblh, ws)
+                u, v = WindDiagnostics.met_to_uv(ws, wdir)
+                sin_d, cos_d = WindDiagnostics.cyclical_decomposition(wdir)
+                vol_ratio = PBLDiagnostics.compute_volume_contraction_ratio(pblh)
+
+                stations_data.append({
+                    "location_id": f"loc_{stn_code.lower()}",
+                    "latitude": float(row.get("latitude", 28.6139)),
+                    "longitude": float(row.get("longitude", 77.2090)),
+                    "timestamp_utc": str(row.get("timestamp_utc")),
+                    "temperature_2m_c": float(row.get("temp_2m_c", 20.0)),
+                    "relative_humidity_2m_pct": float(row.get("rh_2m_pct", 50.0)),
+                    "surface_pressure_hpa": float(row.get("surface_pressure_hpa", 1010.0)),
+                    "wind_speed_10m_ms": ws,
+                    "wind_direction_10m_deg": wdir,
+                    "wind_u_ms": u,
+                    "wind_v_ms": v,
+                    "wind_sin": sin_d,
+                    "wind_cos": cos_d,
+                    "precipitation_mm": float(row.get("precip_mm", 0.0)),
+                    "pbl_height_m": pblh,
+                    "pbl_contraction_ratio": vol_ratio,
+                    "lapse_rate_low_c_100m": float(row.get("lapse_rate_c_100m", 0.4)),
+                    "ventilation_index_m2s": disp["ventilation_index_m2s"],
+                    "dispersion_category": disp["dispersion_category"],
+                    "data_source": "OPEN-METEO-ERA5-BENCHMARK",
+                    "quality_flag": "VALID"
+                })
+            avg_pbl = sum(s["pbl_height_m"] for s in stations_data if s["pbl_height_m"]) / len(stations_data)
+            avg_ws = sum(s["wind_speed_10m_ms"] for s in stations_data if s["wind_speed_10m_ms"]) / len(stations_data)
+            reg_disp = PBLDiagnostics.compute_dispersion_capacity(avg_pbl, avg_ws)
+            return {
+                "status": "OPERATIONAL",
+                "timestamp_utc": stations_data[0]["timestamp_utc"],
+                "regional_summary": {
+                    "mean_pbl_height_m": round(avg_pbl, 1),
+                    "mean_wind_speed_ms": round(avg_ws, 1),
+                    "regional_ventilation_index": round(reg_disp["ventilation_index_m2s"], 1),
+                    "dispersion_category": reg_disp["dispersion_category"],
+                    "is_stagnant": reg_disp["ventilation_index_m2s"] < 2000.0 or avg_ws < 2.0
+                },
+                "station_observations": stations_data
+            }
         return {
             "status": "EMPTY",
             "message": "No meteorological observations currently recorded."

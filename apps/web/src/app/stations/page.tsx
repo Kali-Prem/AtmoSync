@@ -52,7 +52,7 @@ export default async function StationsPage() {
                     <span className="badge badge-info">{stn.provider}</span>
                   </td>
                   <td style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)', fontSize: '0.82rem' }}>
-                    {stn.latitude.toFixed(4)}°N, {stn.longitude.toFixed(4)}°E
+                    {stn.latitude != null ? stn.latitude.toFixed(4) : '—'}°N, {stn.longitude != null ? stn.longitude.toFixed(4) : '—'}°E
                   </td>
                   <td style={{ color: 'var(--text-secondary)' }}>
                     {stn.elevation_m} m ASL

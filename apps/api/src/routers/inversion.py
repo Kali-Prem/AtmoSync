@@ -21,20 +21,31 @@ def get_inversion_status(db: Session = Depends(get_db)):
     and Inversion Trapping Severity Index (ITSI) from the latest meteorological readings.
     """
     latest_weather = db.query(WeatherObservation).order_by(WeatherObservation.time.desc()).first()
-    if not latest_weather or latest_weather.temperature_2m is None:
-        return {
-            "status": "NO_OBSERVATIONS_AVAILABLE",
-            "message": "Awaiting meteorological ingestion cycle."
-        }
-
-    lapse = latest_weather.lapse_rate_low or 0.0
-    pblh = latest_weather.boundary_layer_height_m or 400.0
-    ws = latest_weather.wind_speed_10m or 2.0
+    if latest_weather and latest_weather.temperature_2m is not None:
+        lapse = latest_weather.lapse_rate_low or 0.0
+        pblh = latest_weather.boundary_layer_height_m or 400.0
+        ws = latest_weather.wind_speed_10m or 2.0
+        t2m = latest_weather.temperature_2m
+        time_iso = latest_weather.time.isoformat()
+    else:
+        from apps.api.src.routers.observations import get_observation_dataframe
+        df = get_observation_dataframe()
+        if df is not None and not df.empty:
+            row = df.iloc[-1]
+            lapse = float(row.get("lapse_rate_c_100m", 0.45) or 0.45)
+            pblh = float(row.get("pblh_m", 285.0) or 285.0)
+            ws = float(row.get("wind_speed_10m_ms", 1.8) or 1.8)
+            t2m = float(row.get("temp_2m_c", 20.0) or 20.0)
+            time_iso = str(row.get("timestamp_utc", "2024-02-29T23:00:00Z"))
+        else:
+            return {
+                "status": "NO_OBSERVATIONS_AVAILABLE",
+                "message": "Awaiting meteorological ingestion cycle."
+            }
 
     # Multi-level vertical profile analysis
     # If 180m temperature is not directly in table column, reconstruct from lapse rate:
     # T_180m = T_2m + (lapse_rate / 100) * 178
-    t2m = latest_weather.temperature_2m
     t180m = t2m + (lapse / 100.0) * 178.0
     t80m = t2m + (lapse / 100.0) * 78.0
 
@@ -48,7 +59,7 @@ def get_inversion_status(db: Session = Depends(get_db)):
 
     return {
         "status": "ACTIVE",
-        "timestamp_utc": latest_weather.time.isoformat(),
+        "timestamp_utc": time_iso,
         "temperature_2m_c": t2m,
         "temperature_180m_c": round(t180m, 2),
         "boundary_layer_height_m": pblh,

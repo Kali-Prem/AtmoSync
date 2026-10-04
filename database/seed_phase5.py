@@ -23,8 +23,8 @@ from database.models import WeatherObservation, AirQualityObservation, FireEvent
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("vayudrishti.seed_phase5")
 
-BASE_DIR = Path(__file__).resolve().parent.parent
 PROCESSED_FILE = BASE_DIR / "data" / "processed" / "delhi_ncr_winter_2023_2024.csv"
+FEATURES_FILE = BASE_DIR / "data" / "features" / "delhi_ncr_features.csv"
 RAW_DIR = BASE_DIR / "data" / "raw"
 
 
@@ -107,9 +107,10 @@ def seed_database():
         else:
             logger.info(f"FireEvent table already populated with {f_count} records.")
 
-        if w_count == 0 and PROCESSED_FILE.exists():
-            logger.info(f"Loading processed records from {PROCESSED_FILE}...")
-            df = pd.read_csv(PROCESSED_FILE)
+        data_file = PROCESSED_FILE if PROCESSED_FILE.exists() else (FEATURES_FILE if FEATURES_FILE.exists() else None)
+        if w_count == 0 and data_file is not None:
+            logger.info(f"Loading processed records from {data_file}...")
+            df = pd.read_csv(data_file)
             df["timestamp_utc"] = pd.to_datetime(df["timestamp_utc"], utc=True)
 
             logger.info(f"Seeding weather observations (total rows: {len(df)})...")
