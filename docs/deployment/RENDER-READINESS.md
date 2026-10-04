@@ -134,8 +134,8 @@ python scripts/cli.py db init && python scripts/cli.py db seed && uvicorn apps.a
    Verified `ALLOWED_CORS_ORIGINS` parses JSON array and comma-separated string formats into `List[str]`, supporting the production origin `https://atmosync-web.onrender.com` with `allow_credentials=True`.
 8. **Frontend Next.js Rewrite Verification:**  
    Verified `next.config.mjs` rewrite source `/api/:path*` correctly resolves `atmosync-api` from Render's `property: host` to `https://atmosync-api.onrender.com/api/:path*` (always beginning with valid protocol).
-9. **Frontend Production Build:**  
-   Executed `npm run test:rewrite`, `npx tsc --noEmit`, and `npm run build` in `apps/web`. Completed successfully with 0 TypeScript or Next.js build errors across all environment configurations.
+9. **Frontend Production Build & Module Resolution:**  
+   Executed `npm run test:rewrite`, `npx tsc --noEmit`, and `npm run build` in `apps/web`. Resolved `.gitignore` broad match that masked `apps/web/src/lib/api.ts`, added explicit `"baseUrl": "."` in `tsconfig.json`, added barrel exports in `components/index.ts` and `lib/index.ts`, and verified 12/12 routes compile in a clean isolated build environment without errors.
 
 ---
 
@@ -168,4 +168,4 @@ fromService:
 ## 12. Remaining Blockers
 
 **None.**  
-All three deployment layers (database initialization, CORS configuration, and frontend Next.js rewrite build) are verified and operational locally. Render Blueprint in `render.yaml` is fully deployment-ready.
+All deployment layers (database initialization, CORS configuration, frontend Next.js rewrite build, and frontend module tracking/resolution) are verified and operational locally. Render Blueprint in `render.yaml` is fully deployment-ready.

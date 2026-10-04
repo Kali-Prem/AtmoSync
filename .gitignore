@@ -23,8 +23,10 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
+/lib/
+/lib64/
+!apps/web/src/lib/
+!apps/web/src/lib/**
 parts/
 sdist/
 var/
@@ -45,6 +47,7 @@ yarn-error.log*
 .next/
 out/
 .pnpm-debug.log*
+*.tsbuildinfo
 
 # Data & Models (Strict Rule: No large binary files in git)
 data/raw/*
