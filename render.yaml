@@ -1,0 +1,60 @@
+# ==============================================================================
+# ATMOSYNC — Air Pollution–Weather Coupled Forecasting System for Delhi NCR
+# Smart India Hackathon 2026 — Problem Statement SIH-26082
+# Render Infrastructure Blueprint Specification (render.yaml)
+# ==============================================================================
+
+version: "1"
+
+services:
+  # ----------------------------------------------------------------------------
+  # 1. ATMOSYNC API Backend Service (FastAPI + Uvicorn)
+  # ----------------------------------------------------------------------------
+  - type: web
+    name: atmosync-api
+    runtime: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: "pip install --upgrade pip && pip install -r apps/api/requirements.txt && python scripts/cli.py db seed"
+    startCommand: "uvicorn apps.api.src.main:app --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: APP_NAME
+        value: ATMOSYNC
+      - key: ENVIRONMENT
+        value: production
+      - key: PYTHONPATH
+        value: .
+      - key: DATABASE_URL
+        value: sqlite:///./data/vayudrishti.db
+      - key: ALLOWED_CORS_ORIGINS
+        value: "*"
+      - key: LOG_LEVEL
+        value: INFO
+      - key: FORECAST_HORIZON_HOURS
+        value: "72"
+
+  # ----------------------------------------------------------------------------
+  # 2. ATMOSYNC Web Frontend Service (Next.js 14 App Router)
+  # ----------------------------------------------------------------------------
+  - type: web
+    name: atmosync-web
+    runtime: node
+    region: oregon
+    plan: free
+    branch: main
+    rootDir: apps/web
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm run start"
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: atmosync-api
+          property: host

@@ -1,0 +1,91 @@
+{
+  "dataset_name": "VayuDrishti-DelhiNCR-Winter2023-2024",
+  "version": "1.0.0",
+  "created_at_utc": "2026-10-03T07:32:23.348557+00:00",
+  "date_range": {
+    "start": "2023-10-01",
+    "end": "2024-02-29"
+  },
+  "cadence": "hourly (1h)",
+  "sources": [
+    "Open-Meteo Historical Weather Archive (ECMWF ERA5 / ICON blend)",
+    "Copernicus CAMS Global Atmospheric Composition Forecasts & EAC4"
+  ],
+  "stations": [
+    {
+      "station_id": "DL_ANAND_VIHAR",
+      "station_name": "Anand Vihar, Delhi - DPCC",
+      "latitude": 28.6476,
+      "longitude": 77.316,
+      "start_date": "2023-10-01",
+      "end_date": "2024-02-29",
+      "acquisition_time_utc": "2026-10-03T07:32:24.607237+00:00",
+      "weather_file": "DL_ANAND_VIHAR_weather_2023-10-01_2024-02-29.json",
+      "weather_sha256": "2695cf38bc0f04ce1bf6ef73962706dfb8478cbd9e48c6203536a7ab75602f34",
+      "weather_bytes": 299439,
+      "airquality_file": "DL_ANAND_VIHAR_airquality_2023-10-01_2024-02-29.json",
+      "airquality_sha256": "c9f13e1978e1381e1df7fca2ab209ddbb2e99d0eeb1f32e0476e453c0f40f62e",
+      "airquality_bytes": 189622
+    },
+    {
+      "station_id": "DL_PUNJABI_BAGH",
+      "station_name": "Punjabi Bagh, Delhi - DPCC",
+      "latitude": 28.674,
+      "longitude": 77.131,
+      "start_date": "2023-10-01",
+      "end_date": "2024-02-29",
+      "acquisition_time_utc": "2026-10-03T07:32:29.533331+00:00",
+      "weather_file": "DL_PUNJABI_BAGH_weather_2023-10-01_2024-02-29.json",
+      "weather_sha256": "d172faf7ce9d0affae551c7b1fc68f43e278fb06142b5903803e5894ddc0e471",
+      "weather_bytes": 299502,
+      "airquality_file": "DL_PUNJABI_BAGH_airquality_2023-10-01_2024-02-29.json",
+      "airquality_sha256": "2e0bea14e1a89ab2f2008044aa05e3e436d91676c7f4b5bbfd840cb60591e1e4",
+      "airquality_bytes": 189623
+    },
+    {
+      "station_id": "DL_RK_PURAM",
+      "station_name": "R.K. Puram, Delhi - DPCC",
+      "latitude": 28.5632,
+      "longitude": 77.1869,
+      "start_date": "2023-10-01",
+      "end_date": "2024-02-29",
+      "acquisition_time_utc": "2026-10-03T07:32:32.746688+00:00",
+      "weather_file": "DL_RK_PURAM_weather_2023-10-01_2024-02-29.json",
+      "weather_sha256": "5d2c2059cd5216803655046a881aa9f40959ad35c8cc2342a3ba2411570faf2b",
+      "weather_bytes": 299555,
+      "airquality_file": "DL_RK_PURAM_airquality_2023-10-01_2024-02-29.json",
+      "airquality_sha256": "950ab6e1e5e045eebd14a6f4483c18967d11270c914f5a586a6c8e8eb2b6b201",
+      "airquality_bytes": 190152
+    },
+    {
+      "station_id": "DL_IGI_AIRPORT",
+      "station_name": "IGI Airport (T3), Delhi - IMD",
+      "latitude": 28.562,
+      "longitude": 77.094,
+      "start_date": "2023-10-01",
+      "end_date": "2024-02-29",
+      "acquisition_time_utc": "2026-10-03T07:32:35.010008+00:00",
+      "weather_file": "DL_IGI_AIRPORT_weather_2023-10-01_2024-02-29.json",
+      "weather_sha256": "5a71b32de4eac7bfd487308cfffc054ff5ca15ff949f7f98ea540245ec41ad0b",
+      "weather_bytes": 299281,
+      "airquality_file": "DL_IGI_AIRPORT_airquality_2023-10-01_2024-02-29.json",
+      "airquality_sha256": "4b80b7cdeca54657c8a6e1e570e1f89e630c336b4a7d3c060e17237d2144e1b6",
+      "airquality_bytes": 190153
+    },
+    {
+      "station_id": "DL_BAWANA",
+      "station_name": "Bawana, Delhi - DPCC",
+      "latitude": 28.7762,
+      "longitude": 77.0511,
+      "start_date": "2023-10-01",
+      "end_date": "2024-02-29",
+      "acquisition_time_utc": "2026-10-03T07:32:37.416923+00:00",
+      "weather_file": "DL_BAWANA_weather_2023-10-01_2024-02-29.json",
+      "weather_sha256": "77fa4073d7a741d38ec807b4f840013446a48ccf3a02c42e98fafccd332b1d17",
+      "weather_bytes": 299114,
+      "airquality_file": "DL_BAWANA_airquality_2023-10-01_2024-02-29.json",
+      "airquality_sha256": "f4c0e27ed41bb36747ce30f1441976a90407587e4a804a4d1beb1525bc253055",
+      "airquality_bytes": 189624
+    }
+  ]
+}

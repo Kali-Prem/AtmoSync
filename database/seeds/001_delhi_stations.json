@@ -1,0 +1,202 @@
+[
+  {
+    "station_code": "DL_ANAND_VIHAR",
+    "name": "Anand Vihar, Delhi - DPCC",
+    "region": "Delhi-East",
+    "latitude": 28.6476,
+    "longitude": 77.3160,
+    "provider": "DPCC",
+    "elevation_m": 213.0,
+    "metadata": { "station_type": "Urban Industrial/Transport", "is_traffic_hotspot": true }
+  },
+  {
+    "station_code": "DL_PUNJABI_BAGH",
+    "name": "Punjabi Bagh, Delhi - DPCC",
+    "region": "Delhi-West",
+    "latitude": 28.6740,
+    "longitude": 77.1310,
+    "provider": "DPCC",
+    "elevation_m": 218.0,
+    "metadata": { "station_type": "Urban Residential", "is_traffic_hotspot": true }
+  },
+  {
+    "station_code": "DL_RK_PURAM",
+    "name": "R.K. Puram, Delhi - DPCC",
+    "region": "Delhi-South",
+    "latitude": 28.5632,
+    "longitude": 77.1869,
+    "provider": "DPCC",
+    "elevation_m": 222.0,
+    "metadata": { "station_type": "Urban Residential", "is_traffic_hotspot": false }
+  },
+  {
+    "station_code": "DL_IGI_AIRPORT",
+    "name": "IGI Airport (T3), Delhi - IMD",
+    "region": "Delhi-SouthWest",
+    "latitude": 28.5620,
+    "longitude": 77.0940,
+    "provider": "IMD",
+    "elevation_m": 228.0,
+    "metadata": { "station_type": "Airport / Commercial", "is_traffic_hotspot": true }
+  },
+  {
+    "station_code": "DL_BAWANA",
+    "name": "Bawana, Delhi - DPCC",
+    "region": "Delhi-NorthWest",
+    "latitude": 28.7762,
+    "longitude": 77.0511,
+    "provider": "DPCC",
+    "elevation_m": 215.0,
+    "metadata": { "station_type": "Industrial Area", "is_traffic_hotspot": true }
+  },
+  {
+    "station_code": "DL_JAHANGIRPURI",
+    "name": "Jahangirpuri, Delhi - DPCC",
+    "region": "Delhi-North",
+    "latitude": 28.7328,
+    "longitude": 77.1706,
+    "provider": "DPCC",
+    "elevation_m": 216.0,
+    "metadata": { "station_type": "Industrial / Residential", "is_traffic_hotspot": true }
+  },
+  {
+    "station_code": "DL_MANDIR_MARG",
+    "name": "Mandir Marg, Delhi - DPCC",
+    "region": "Delhi-Central",
+    "latitude": 28.6365,
+    "longitude": 77.2011,
+    "provider": "DPCC",
+    "elevation_m": 220.0,
+    "metadata": { "station_type": "Urban Institutional", "is_traffic_hotspot": false }
+  },
+  {
+    "station_code": "DL_DWARKA_SEC8",
+    "name": "Dwarka Sector 8, Delhi - DPCC",
+    "region": "Delhi-SouthWest",
+    "latitude": 28.5710,
+    "longitude": 77.0719,
+    "provider": "DPCC",
+    "elevation_m": 224.0,
+    "metadata": { "station_type": "Urban Residential", "is_traffic_hotspot": false }
+  },
+  {
+    "station_code": "DL_OKHLA_PH2",
+    "name": "Okhla Phase-2, Delhi - DPCC",
+    "region": "Delhi-SouthEast",
+    "latitude": 28.5308,
+    "longitude": 77.2712,
+    "provider": "DPCC",
+    "elevation_m": 214.0,
+    "metadata": { "station_type": "Industrial Area", "is_traffic_hotspot": true }
+  },
+  {
+    "station_code": "DL_WAZIRPUR",
+    "name": "Wazirpur, Delhi - DPCC",
+    "region": "Delhi-North",
+    "latitude": 28.6998,
+    "longitude": 77.1655,
+    "provider": "DPCC",
+    "elevation_m": 217.0,
+    "metadata": { "station_type": "Industrial Area", "is_traffic_hotspot": true }
+  },
+  {
+    "station_code": "DL_LODHI_ROAD",
+    "name": "Lodhi Road, Delhi - IMD",
+    "region": "Delhi-South",
+    "latitude": 28.5883,
+    "longitude": 77.2217,
+    "provider": "IMD",
+    "elevation_m": 219.0,
+    "metadata": { "station_type": "Urban Background / Institutional", "is_traffic_hotspot": false }
+  },
+  {
+    "station_code": "DL_SIRI_FORT",
+    "name": "Siri Fort, Delhi - CPCB",
+    "region": "Delhi-South",
+    "latitude": 28.5504,
+    "longitude": 77.2159,
+    "provider": "CPCB",
+    "elevation_m": 221.0,
+    "metadata": { "station_type": "Urban Residential", "is_traffic_hotspot": false }
+  },
+  {
+    "station_code": "DL_ROHINI_SEC16",
+    "name": "Rohini Sector 16, Delhi - DPCC",
+    "region": "Delhi-NorthWest",
+    "latitude": 28.7325,
+    "longitude": 77.1199,
+    "provider": "DPCC",
+    "elevation_m": 216.0,
+    "metadata": { "station_type": "Urban Residential", "is_traffic_hotspot": false }
+  },
+  {
+    "station_code": "DL_ASHOK_VIHAR",
+    "name": "Ashok Vihar, Delhi - DPCC",
+    "region": "Delhi-NorthWest",
+    "latitude": 28.6954,
+    "longitude": 77.1816,
+    "provider": "DPCC",
+    "elevation_m": 217.0,
+    "metadata": { "station_type": "Urban Residential", "is_traffic_hotspot": false }
+  },
+  {
+    "station_code": "DL_NAJAFGARH",
+    "name": "Najafgarh, Delhi - DPCC",
+    "region": "Delhi-SouthWest",
+    "latitude": 28.5701,
+    "longitude": 76.9338,
+    "provider": "DPCC",
+    "elevation_m": 216.0,
+    "metadata": { "station_type": "Rural / Semi-Urban", "is_traffic_hotspot": false }
+  },
+  {
+    "station_code": "UP_NOIDA_SEC62",
+    "name": "Sector 62, Noida - UPPCB",
+    "region": "UP-NCR",
+    "latitude": 28.6245,
+    "longitude": 77.3650,
+    "provider": "UPPCB",
+    "elevation_m": 211.0,
+    "metadata": { "station_type": "Commercial / Institutional", "is_traffic_hotspot": true }
+  },
+  {
+    "station_code": "UP_GHAZIABAD_VASUNDHARA",
+    "name": "Vasundhara, Ghaziabad - UPPCB",
+    "region": "UP-NCR",
+    "latitude": 28.6603,
+    "longitude": 77.3573,
+    "provider": "UPPCB",
+    "elevation_m": 212.0,
+    "metadata": { "station_type": "Urban Residential / Industrial", "is_traffic_hotspot": true }
+  },
+  {
+    "station_code": "HR_GURUGRAM_SEC51",
+    "name": "Sector 51, Gurugram - HSPCB",
+    "region": "Haryana-NCR",
+    "latitude": 28.4275,
+    "longitude": 77.0818,
+    "provider": "HSPCB",
+    "elevation_m": 226.0,
+    "metadata": { "station_type": "Urban Residential", "is_traffic_hotspot": true }
+  },
+  {
+    "station_code": "HR_FARIDABAD_NIT",
+    "name": "New Industrial Town, Faridabad - HSPCB",
+    "region": "Haryana-NCR",
+    "latitude": 28.3845,
+    "longitude": 77.3032,
+    "provider": "HSPCB",
+    "elevation_m": 215.0,
+    "metadata": { "station_type": "Industrial Area", "is_traffic_hotspot": true }
+  },
+  {
+    "station_code": "DL_AYA_NAGAR",
+    "name": "Aya Nagar, Delhi - IMD",
+    "region": "Delhi-South",
+    "latitude": 28.4707,
+    "longitude": 77.1099,
+    "provider": "IMD",
+    "elevation_m": 235.0,
+    "metadata": { "station_type": "Meteorological Baseline / Semi-Rural", "is_traffic_hotspot": false }
+  }
+]

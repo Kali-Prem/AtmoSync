@@ -1,0 +1,52 @@
+# ATMOSYNC — Staging Configuration
+environment: staging
+debug: true
+log_level: INFO
+
+database:
+  url: "postgresql+psycopg://vayudrishti:vayudrishti_password@localhost:5432/vayudrishti_staging"
+  pool_size: 5
+  max_overflow: 10
+
+redis:
+  url: "redis://localhost:6379/1"
+  enabled: true
+
+providers:
+  weather:
+    name: "open-meteo"
+    base_url: "https://api.open-meteo.com/v1"
+    timeout_seconds: 15
+    retries: 3
+  air_quality:
+    name: "openaq"
+    base_url: "https://api.openaq.org/v3"
+    timeout_seconds: 15
+    retries: 3
+  satellite_fire:
+    name: "nasa-firms"
+    base_url: "https://firms.modaps.eosdis.nasa.gov/api"
+    timeout_seconds: 30
+    retries: 2
+  chemical_prior:
+    name: "cams-global"
+    base_url: "https://air-quality-api.open-meteo.com/v1"
+    timeout_seconds: 15
+    retries: 2
+
+domain:
+  delhi_nct:
+    min_lat: 28.40
+    max_lat: 28.90
+    min_lon: 76.80
+    max_lon: 77.40
+  regional_plume:
+    min_lat: 27.00
+    max_lat: 32.50
+    min_lon: 74.00
+    max_lon: 79.50
+
+modeling:
+  horizon_hours: 72
+  time_step_hours: 1
+  aqi_standard: "CPCB_NAQI_2014"

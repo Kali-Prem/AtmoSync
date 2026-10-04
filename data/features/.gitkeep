@@ -1,0 +1,3 @@
+# Features Directory
+This directory stores engineered tabular features (e.g. Parquet/CSV) for training and evaluation.
+Ignored by git.

@@ -1,0 +1,57 @@
+name: ATMOSYNC CI
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  python-test:
+    name: Backend API & Scientific Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r apps/api/requirements.txt
+
+      - name: Initialize Database & Seed Stations
+        run: |
+          python scripts/cli.py db init
+          python scripts/cli.py db seed
+
+      - name: Run Test Suite (pytest)
+        run: |
+          pytest -v tests/
+
+  web-build:
+    name: Frontend Typecheck & Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: apps/web/package.json
+
+      - name: Install Web Dependencies
+        working-directory: apps/web
+        run: npm ci
+
+      - name: Build Next.js Web Application
+        working-directory: apps/web
+        run: npm run build

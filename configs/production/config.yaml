@@ -1,0 +1,52 @@
+# ATMOSYNC — Production Configuration
+environment: production
+debug: false
+log_level: INFO
+
+database:
+  url: "postgresql+psycopg://vayudrishti:vayudrishti_password@database:5432/vayudrishti_db"
+  pool_size: 20
+  max_overflow: 40
+
+redis:
+  url: "redis://cache:6379/0"
+  enabled: true
+
+providers:
+  weather:
+    name: "open-meteo"
+    base_url: "https://api.open-meteo.com/v1"
+    timeout_seconds: 20
+    retries: 4
+  air_quality:
+    name: "openaq"
+    base_url: "https://api.openaq.org/v3"
+    timeout_seconds: 20
+    retries: 4
+  satellite_fire:
+    name: "nasa-firms"
+    base_url: "https://firms.modaps.eosdis.nasa.gov/api"
+    timeout_seconds: 45
+    retries: 3
+  chemical_prior:
+    name: "cams-global"
+    base_url: "https://air-quality-api.open-meteo.com/v1"
+    timeout_seconds: 25
+    retries: 3
+
+domain:
+  delhi_nct:
+    min_lat: 28.40
+    max_lat: 28.90
+    min_lon: 76.80
+    max_lon: 77.40
+  regional_plume:
+    min_lat: 27.00
+    max_lat: 32.50
+    min_lon: 74.00
+    max_lon: 79.50
+
+modeling:
+  horizon_hours: 72
+  time_step_hours: 1
+  aqi_standard: "CPCB_NAQI_2014"
