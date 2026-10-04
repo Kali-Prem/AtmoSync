@@ -32,6 +32,8 @@ def cmd_db_init(args):
     logger.info("Database schema initialized successfully.")
 
 def cmd_db_seed(args):
+    logger.info("Ensuring database schema exists before seeding...")
+    init_database()
     logger.info("Seeding verified Delhi NCR monitoring stations...")
     with SessionLocal() as db:
         count = seed_monitoring_stations(db)
@@ -77,7 +79,8 @@ def main():
     # DB subcommands
     db_parser = subparsers.add_parser("db", help="Database management commands")
     db_sub = db_parser.add_subparsers(dest="db_action")
-    db_sub.add_parser("init", help="Create tables")
+    db_sub.add_parser("init", help="Create tables / initialize schema")
+    db_sub.add_parser("migrate", help="Run database migrations / create schema")
     db_sub.add_parser("seed", help="Seed monitoring stations")
 
     # Ingest subcommands
@@ -102,7 +105,7 @@ def main():
     args = parser.parse_args()
 
     if args.subcommand == "db":
-        if args.db_action == "init":
+        if args.db_action in ("init", "migrate"):
             cmd_db_init(args)
         elif args.db_action == "seed":
             cmd_db_seed(args)

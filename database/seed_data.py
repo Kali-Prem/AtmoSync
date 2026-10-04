@@ -16,6 +16,9 @@ def seed_monitoring_stations(db: Session) -> int:
     if not seed_file.exists():
         raise FileNotFoundError(f"Seed file not found: {seed_file}")
 
+    # Ensure schema exists before querying or inserting
+    init_database(bind_engine=db.get_bind())
+
     with open(seed_file, "r", encoding="utf-8") as f:
         stations_data = json.load(f)
 

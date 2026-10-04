@@ -16,8 +16,8 @@ services:
     region: oregon
     plan: free
     branch: main
-    buildCommand: "pip install --upgrade pip && pip install -r apps/api/requirements.txt && python scripts/cli.py db seed"
-    startCommand: "uvicorn apps.api.src.main:app --host 0.0.0.0 --port $PORT"
+    buildCommand: "pip install --upgrade pip && pip install -r apps/api/requirements.txt"
+    startCommand: "python scripts/cli.py db init && python scripts/cli.py db seed && uvicorn apps.api.src.main:app --host 0.0.0.0 --port $PORT"
     healthCheckPath: /health
     autoDeploy: true
     envVars:

@@ -73,11 +73,11 @@ If you prefer deploying services individually through the Render Dashboard, foll
    - **Runtime:** `Python 3`
    - **Build Command:**
      ```bash
-     pip install --upgrade pip && pip install -r apps/api/requirements.txt && python scripts/cli.py db seed
+     pip install --upgrade pip && pip install -r apps/api/requirements.txt
      ```
    - **Start Command:**
      ```bash
-     uvicorn apps.api.src.main:app --host 0.0.0.0 --port $PORT
+     python scripts/cli.py db init && python scripts/cli.py db seed && uvicorn apps.api.src.main:app --host 0.0.0.0 --port $PORT
      ```
    - **Plan:** `Free` (or `Starter` for persistent memory)
 4. Under **Advanced** → **Health Check Path**, enter:
@@ -139,7 +139,7 @@ ATMOSYNC provides dual-mode database support:
 
 ### Option 1: Embedded SQLite Fallback (Zero Setup / Free Tier)
 - Default setting: `DATABASE_URL=sqlite:///./data/vayudrishti.db`
-- The build command `python scripts/cli.py db seed` automatically initializes tables and seeds the 20 verified Delhi NCR CAAQMS stations into the database.
+- The runtime start command `python scripts/cli.py db init && python scripts/cli.py db seed && uvicorn ...` automatically initializes all 8 database tables (including `locations` and `monitoring_stations`) and seeds the 20 verified Delhi NCR CAAQMS stations into the database prior to serving requests.
 - Completely functional out-of-the-box for evaluation and live hackathon demonstrations.
 
 ### Option 2: Render Managed PostgreSQL (Production)
@@ -148,7 +148,7 @@ ATMOSYNC provides dual-mode database support:
 - Database: `atmosync_db`
 - User: `atmosync`
 - Copy the **Internal Database URL** and set it as `DATABASE_URL` in `atmosync-api`.
-- *Note:* The backend automatically converts legacy `postgres://` prefixes to `postgresql://` to maintain full SQLAlchemy 2.0 compatibility.
+- *Note:* The backend automatically converts legacy `postgres://` and `postgresql://` prefixes to `postgresql+psycopg://` to leverage the modern `psycopg` (v3) driver installed in `apps/api/requirements.txt`.
 
 ---
 
@@ -157,7 +157,7 @@ ATMOSYNC provides dual-mode database support:
 Before pushing changes to Render, verify all build and health checks locally:
 
 ```bash
-# 1. Run Backend Pytest Suite (53 tests)
+# 1. Run Backend Pytest Suite (57 tests)
 .venv/bin/pytest -v tests/
 
 # 2. Verify API Health Endpoint
@@ -193,6 +193,6 @@ On Render's Free tier, services spin down after 15 minutes of inactivity:
 
 | Service Name | Render Service Type | Build Command | Start Command | Health Check |
 | :--- | :--- | :--- | :--- | :--- |
-| **`atmosync-api`** | Web Service (Python) | `pip install -r apps/api/requirements.txt && python scripts/cli.py db seed` | `uvicorn apps.api.src.main:app --host 0.0.0.0 --port $PORT` | `/health` |
+| **`atmosync-api`** | Web Service (Python) | `pip install --upgrade pip && pip install -r apps/api/requirements.txt` | `python scripts/cli.py db init && python scripts/cli.py db seed && uvicorn apps.api.src.main:app --host 0.0.0.0 --port $PORT` | `/health` |
 | **`atmosync-web`** | Web Service (Node) | `npm install && npm run build` | `npm run start` | `/` |
 | **`atmosync-db`** | PostgreSQL (Optional) | Managed by Render | Managed by Render | Port 5432 |
