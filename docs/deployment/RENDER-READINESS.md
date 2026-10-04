@@ -128,14 +128,44 @@ python scripts/cli.py db init && python scripts/cli.py db seed && uvicorn apps.a
    - `GET /health` -> `200 OK`, `status: healthy`, `database.status: connected`.
    - `GET /api/v1/locations` -> `200 OK`, returned 10 region records.
    - `GET /api/v1/locations/stations` -> `200 OK`, returned 20 CAAQMS monitoring stations.
-6. **Full Pytest Suite:**  
-   All 57 backend tests in `tests/` passed (100% pass rate).
-7. **Frontend Production Build:**  
-   Executed `npx tsc --noEmit && npm run build` in `apps/web`. Completed successfully with 0 TypeScript or Next.js build errors.
+6. **Backend Pytest Suite:**  
+   All 62 backend tests in `tests/` passed (including 5 CORS configuration tests and 4 database initialization tests).
+7. **CORS Protocol Verification:**  
+   Verified `ALLOWED_CORS_ORIGINS` parses JSON array and comma-separated string formats into `List[str]`, supporting the production origin `https://atmosync-web.onrender.com` with `allow_credentials=True`.
+8. **Frontend Next.js Rewrite Verification:**  
+   Verified `next.config.mjs` rewrite source `/api/:path*` correctly resolves `atmosync-api` from Render's `property: host` to `https://atmosync-api.onrender.com/api/:path*` (always beginning with valid protocol).
+9. **Frontend Production Build:**  
+   Executed `npm run test:rewrite`, `npx tsc --noEmit`, and `npm run build` in `apps/web`. Completed successfully with 0 TypeScript or Next.js build errors across all environment configurations.
 
 ---
 
-## 11. Remaining Blockers
+## 11. Frontend Rewrite Specification
+
+```text
+Frontend framework:
+Next.js 14 (App Router)
+
+Rewrite:
+/api/:path*
+
+Destination:
+https://atmosync-api.onrender.com/api/:path* (Production Render)
+http://127.0.0.1:8000/api/:path* (Local Development Fallback)
+
+Required environment variable:
+NEXT_PUBLIC_API_URL
+
+Render configuration:
+fromService:
+  type: web
+  name: atmosync-api
+  property: host
+(Or explicit URL: https://atmosync-api.onrender.com)
+```
+
+---
+
+## 12. Remaining Blockers
 
 **None.**  
-The database initialization, migration, and seeding pipeline has been verified end-to-end locally. Render configuration in `render.yaml` is updated and deployment-ready.
+All three deployment layers (database initialization, CORS configuration, and frontend Next.js rewrite build) are verified and operational locally. Render Blueprint in `render.yaml` is fully deployment-ready.

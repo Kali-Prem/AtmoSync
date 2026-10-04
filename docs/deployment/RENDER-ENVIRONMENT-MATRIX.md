@@ -68,5 +68,31 @@ Allowed production frontend origins
 | Variable | Type | Required | Default / Expected Format | Example | Purpose |
 | :--- | :--- | :---: | :--- | :--- | :--- |
 | `NODE_ENV` | `str` | **YES** | `production` | `production` | Optimizes Next.js 14 production bundle. |
-| `NEXT_PUBLIC_API_URL` | `str` | **YES** | Public or private backend host URL | Derived from `atmosync-api` host | Base URL used by browser client to fetch forecasts and telemetry. |
+| `NEXT_PUBLIC_API_URL` | `str` | **YES** | Public URL or Render service name | `https://atmosync-api.onrender.com` or `atmosync-api` | Base URL used by Next.js server rewrites (`/api/:path*`) and client API requests. |
 | `PORT` | `int` | **YES** | Dynamic port set by Render | *Set automatically by Render* | Bound port for Next.js HTTP server. |
+
+---
+
+## 4. Frontend Next.js Rewrite Specification
+
+```text
+Frontend framework:
+Next.js 14 (App Router)
+
+Rewrite:
+/api/:path*
+
+Destination:
+https://atmosync-api.onrender.com/api/:path* (Production Render)
+http://127.0.0.1:8000/api/:path* (Local Development Fallback)
+
+Required environment variable:
+NEXT_PUBLIC_API_URL
+
+Render configuration:
+fromService:
+  type: web
+  name: atmosync-api
+  property: host
+(Or explicit URL: https://atmosync-api.onrender.com)
+```

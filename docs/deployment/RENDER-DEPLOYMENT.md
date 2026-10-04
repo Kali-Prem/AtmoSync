@@ -128,8 +128,31 @@ If you prefer deploying services individually through the Render Dashboard, foll
    | Key | Value | Notes |
    | :--- | :--- | :--- |
    | `NODE_ENV` | `production` | Optimizes Next.js bundle |
-   | `NEXT_PUBLIC_API_URL` | `https://atmosync-api.onrender.com` | Replace with your actual backend URL |
+   | `NEXT_PUBLIC_API_URL` | `https://atmosync-api.onrender.com` | Or Render internal host `atmosync-api` |
 6. Click **Create Web Service**. Note the assigned URL (e.g., `https://atmosync-web.onrender.com`).
+
+#### Frontend Next.js Rewrite Architecture:
+```text
+Frontend framework:
+Next.js 14 (App Router)
+
+Rewrite:
+/api/:path*
+
+Destination:
+https://atmosync-api.onrender.com/api/:path* (Production Render)
+http://127.0.0.1:8000/api/:path* (Local Development Fallback)
+
+Required environment variable:
+NEXT_PUBLIC_API_URL
+
+Render configuration:
+fromService:
+  type: web
+  name: atmosync-api
+  property: host
+(Or explicit URL: https://atmosync-api.onrender.com)
+```
 
 ---
 
