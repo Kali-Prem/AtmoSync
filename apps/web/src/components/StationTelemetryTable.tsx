@@ -25,7 +25,7 @@ export default function StationTelemetryTable({ stations, latestObs }: StationTe
   }, [latestObs]);
 
   // Standard ordered stations: 5 Default Anchors first in canonical order, followed by other active monitors
-  const canonicalOrder = ['DL_ANAND_VIHAR', 'DL_PUNJABI_BAGH', 'DL_RK_PURAM', 'DL_IGI_AIRPORT', 'DL_BAWANA'];
+  const canonicalOrder = ['DL_ANAND_VIHAR', 'DL_BAWANA', 'DL_IGI_AIRPORT', 'DL_PUNJABI_BAGH', 'DL_RK_PURAM'];
   const sortedStations = useMemo(() => {
     return [...stations].sort((a, b) => {
       const idxA = canonicalOrder.indexOf(a.station_code);
@@ -45,7 +45,7 @@ export default function StationTelemetryTable({ stations, latestObs }: StationTe
 
   const displayedStations = useMemo(() => {
     if (isSearchActive) {
-      // When searching: search across ALL stations (including hidden/experimental stations)
+      // When searching: search across ALL stations (including experimental/hidden)
       return sortedStations.filter((stn) => {
         const nameMatch = stn.name.toLowerCase().includes(trimmedQuery);
         const codeMatch = stn.station_code.toLowerCase().includes(trimmedQuery);
@@ -58,9 +58,7 @@ export default function StationTelemetryTable({ stations, latestObs }: StationTe
       });
     }
 
-    // When NOT searching:
-    // If showMore is true -> all stations
-    // If showMore is false -> only the 5 default anchor stations
+    // Default: 5 anchor stations, or all when showMore is true
     if (showMore) {
       return sortedStations;
     }
@@ -72,123 +70,100 @@ export default function StationTelemetryTable({ stations, latestObs }: StationTe
   const additionalCount = sortedStations.length - defaultAnchorsCount;
 
   return (
-    <div style={{ marginBottom: '2.5rem' }}>
-      {/* Table Section Header & Controls */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '1rem',
-          flexWrap: 'wrap',
-          gap: '1rem',
-        }}
-      >
+    <div className="table-card" aria-label="Anchor Monitoring Stations Ground Telemetry">
+      {/* Header and Controls */}
+      <div className="card-title-group">
         <div>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 700 }}>Anchor Monitoring Stations — Real Ground Telemetry</h2>
-          <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '0.2rem' }}>
-            {isSearchActive ? (
-              <span>
-                Search results: <strong>{displayedStations.length}</strong> matching station
-                {displayedStations.length === 1 ? '' : 's'} across complete network
-              </span>
-            ) : showMore ? (
-              <span>
-                Showing complete network (<strong>{sortedStations.length}</strong> monitoring stations)
-              </span>
-            ) : (
-              <span>
-                Baseline view: <strong>{defaultAnchorsCount}</strong> default anchor stations (Winter 2023–2024 ground truth)
-              </span>
-            )}
-          </div>
+          <h2 className="card-title">Anchor Monitoring Stations — Real Ground Telemetry</h2>
+          <div className="card-subtitle">Live station data from Delhi NCR CAAQMS network</div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-          {/* Station Discovery Search Input */}
-          <div style={{ position: 'relative', width: '280px', maxWidth: '100%' }}>
-            <input
-              type="text"
-              id="station-search-input"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search stations (e.g. Anand, Alipur, DL_)..."
+        {/* Search Field */}
+        <div style={{ position: 'relative', width: '260px', maxWidth: '100%' }}>
+          <input
+            type="text"
+            id="station-search-input"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search stations (e.g., Anand, DL_, Bawana...)"
+            style={{
+              width: '100%',
+              padding: '0.45rem 1.8rem 0.45rem 0.75rem',
+              borderRadius: '8px',
+              border: '1px solid var(--border-subtle)',
+              background: 'var(--bg-card-hover)',
+              color: 'var(--text-primary)',
+              fontSize: '0.8rem',
+              outline: 'none',
+              transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+            }}
+          />
+          {isSearchActive && (
+            <button
+              type="button"
+              id="station-search-clear-btn"
+              onClick={() => setSearchQuery('')}
+              aria-label="Clear station search"
               style={{
-                width: '100%',
-                padding: '0.5rem 2rem 0.5rem 0.85rem',
-                borderRadius: '8px',
-                border: '1px solid var(--border-subtle)',
-                background: 'var(--bg-card)',
-                color: 'var(--text-primary)',
-                fontSize: '0.82rem',
-                outline: 'none',
-                transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+                position: 'absolute',
+                right: '0.5rem',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                background: 'none',
+                border: 'none',
+                color: 'var(--text-muted)',
+                cursor: 'pointer',
+                fontSize: '1rem',
+                lineHeight: 1,
+                padding: '0.15rem',
               }}
-            />
-            {isSearchActive && (
-              <button
-                type="button"
-                id="station-search-clear-btn"
-                onClick={() => setSearchQuery('')}
-                aria-label="Clear station search"
-                title="Clear search"
-                style={{
-                  position: 'absolute',
-                  right: '0.55rem',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  background: 'none',
-                  border: 'none',
-                  color: 'var(--text-muted)',
-                  cursor: 'pointer',
-                  fontSize: '1.1rem',
-                  lineHeight: 1,
-                  padding: '0.2rem',
-                }}
-              >
-                &times;
-              </button>
-            )}
-          </div>
-
-          <Link href="/forecast" style={{ color: 'var(--accent-cyan)', fontSize: '0.875rem', textDecoration: 'none', fontWeight: 600 }}>
-            View 72-Hour Predictions &rarr;
-          </Link>
+            >
+              &times;
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Real Observations Table */}
-      <div className="glass-panel" style={{ overflowX: 'auto', padding: '0.5rem' }}>
+      {/* Observation Table with Exact Reference Columns */}
+      <div className="data-table-container">
         <table className="data-table">
           <thead>
             <tr>
-              <th>Station</th>
-              <th>Latest PM2.5</th>
+              <th style={{ width: '32px', textAlign: 'center' }}>#</th>
+              <th>STATION</th>
+              <th>LATEST PM2.5</th>
               <th>PM10</th>
-              <th>NO2</th>
-              <th>Temp</th>
-              <th>Wind Speed</th>
-              <th>PBL Height</th>
-              <th>Trapping Index (ITSI)</th>
-              <th>Action</th>
+              <th>NO₂</th>
+              <th>TEMP</th>
+              <th>WIND</th>
+              <th>PBLH</th>
+              <th>ITSI /100</th>
+              <th>STATUS</th>
+              <th>ACTION</th>
             </tr>
           </thead>
           <tbody>
             {displayedStations.length > 0 ? (
-              displayedStations.map((stn) => {
+              displayedStations.map((stn, index) => {
                 const rec = obsMap.get(stn.station_code);
                 const hasTelemetry = rec !== undefined;
                 const isExperimental = stn.extra_metadata?.is_experimental === true;
 
                 return (
                   <tr key={stn.station_code}>
+                    {/* Index Column */}
+                    <td style={{ textAlign: 'center', color: 'var(--text-muted)', fontWeight: 600 }}>
+                      {index + 1}
+                    </td>
+
+                    {/* Station Name & Code */}
                     <td style={{ fontWeight: 600 }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
-                        <span>{stn.name}</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
+                        <span>{stn.name.split(',')[0]}</span>
                         {stn.is_default_anchor && (
                           <span
                             className="badge badge-info"
-                            style={{ fontSize: '0.65rem', padding: '0.1rem 0.4rem', textTransform: 'uppercase' }}
+                            style={{ fontSize: '0.62rem', padding: '0.1rem 0.35rem' }}
                           >
                             Anchor
                           </span>
@@ -197,10 +172,9 @@ export default function StationTelemetryTable({ stations, latestObs }: StationTe
                           <span
                             className="badge badge-neutral"
                             style={{
-                              fontSize: '0.65rem',
-                              padding: '0.1rem 0.4rem',
-                              textTransform: 'uppercase',
-                              borderColor: 'var(--border-active)',
+                              fontSize: '0.62rem',
+                              padding: '0.1rem 0.35rem',
+                              borderColor: 'var(--accent-cyan)',
                               color: 'var(--accent-cyan)',
                             }}
                           >
@@ -208,11 +182,12 @@ export default function StationTelemetryTable({ stations, latestObs }: StationTe
                           </span>
                         )}
                       </div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
+                      <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '0.1rem' }}>
                         {stn.station_code} &bull; {stn.provider}
                       </div>
                     </td>
 
+                    {/* Real Telemetry Data */}
                     {hasTelemetry ? (
                       <>
                         <td
@@ -230,20 +205,26 @@ export default function StationTelemetryTable({ stations, latestObs }: StationTe
                         </td>
                         <td>{rec.pm10} µg/m³</td>
                         <td>{rec.no2} µg/m³</td>
-                        <td>{rec.temp_c} °C</td>
+                        <td>{rec.temp_c}&deg;C</td>
                         <td>{rec.wind_speed_ms} m/s</td>
                         <td>{rec.pblh_m} m</td>
                         <td>
                           <span className="badge badge-warning">{rec.itsi} / 100</span>
                         </td>
                         <td>
+                          <span className="badge badge-success" style={{ fontSize: '0.65rem' }}>
+                            Online
+                          </span>
+                        </td>
+                        <td>
                           <Link
-                            href={`/forecast?station=${rec.station_code}`}
+                            href={`/forecast?station=${stn.station_code}`}
                             style={{
                               color: 'var(--accent-cyan)',
-                              fontSize: '0.82rem',
+                              fontSize: '0.78rem',
                               fontWeight: 600,
                               textDecoration: 'none',
+                              whiteSpace: 'nowrap',
                             }}
                           >
                             Forecast &rarr;
@@ -258,25 +239,24 @@ export default function StationTelemetryTable({ stations, latestObs }: StationTe
                         <td style={{ color: 'var(--text-muted)' }}>&mdash;</td>
                         <td style={{ color: 'var(--text-muted)' }}>&mdash;</td>
                         <td style={{ color: 'var(--text-muted)' }}>&mdash;</td>
+                        <td style={{ color: 'var(--text-muted)' }}>&mdash;</td>
                         <td>
-                          <span
-                            className="badge badge-neutral"
-                            style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}
-                            title="Continuous telemetry ingestion awaiting integration cycle"
-                          >
-                            No telemetry available
+                          <span className="badge badge-neutral" style={{ fontSize: '0.65rem' }}>
+                            {isExperimental ? 'Standby' : 'Registry'}
                           </span>
                         </td>
                         <td>
-                          <span
+                          <Link
+                            href={`/forecast?station=${stn.station_code}`}
                             style={{
-                              fontSize: '0.8rem',
                               color: 'var(--text-muted)',
-                              fontStyle: 'normal',
+                              fontSize: '0.78rem',
+                              textDecoration: 'none',
+                              whiteSpace: 'nowrap',
                             }}
                           >
-                            {isExperimental ? 'Demo Node' : 'Registry Only'}
-                          </span>
+                            View &rarr;
+                          </Link>
                         </td>
                       </>
                     )}
@@ -285,12 +265,12 @@ export default function StationTelemetryTable({ stations, latestObs }: StationTe
               })
             ) : isSearchActive ? (
               <tr>
-                <td colSpan={9} style={{ padding: '3rem 1.5rem', textAlign: 'center' }}>
-                  <div style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '1rem', marginBottom: '0.35rem' }}>
+                <td colSpan={11} style={{ padding: '2.5rem 1rem', textAlign: 'center' }}>
+                  <div style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.25rem' }}>
                     No stations found
                   </div>
-                  <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1rem' }}>
-                    No monitoring station matches &ldquo;<strong>{searchQuery}</strong>&rdquo;. Try searching by station name, code (e.g. DL_, Anand, Alipur), or area.
+                  <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '0.85rem' }}>
+                    No station matches &ldquo;<strong>{searchQuery}</strong>&rdquo;. Try searching by name (e.g. Anand, Alipur, Bawana) or code (DL_).
                   </div>
                   <button
                     type="button"
@@ -299,9 +279,9 @@ export default function StationTelemetryTable({ stations, latestObs }: StationTe
                       background: 'var(--bg-card-hover)',
                       border: '1px solid var(--border-subtle)',
                       color: 'var(--accent-cyan)',
-                      padding: '0.4rem 1rem',
+                      padding: '0.35rem 0.85rem',
                       borderRadius: '6px',
-                      fontSize: '0.82rem',
+                      fontSize: '0.78rem',
                       fontWeight: 600,
                       cursor: 'pointer',
                     }}
@@ -310,22 +290,10 @@ export default function StationTelemetryTable({ stations, latestObs }: StationTe
                   </button>
                 </td>
               </tr>
-            ) : latestObs?.status === 'EMPTY' ? (
-              <tr>
-                <td colSpan={9} style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-                  No station telemetry records currently recorded in database. Awaiting telemetry ingestion cycle.
-                </td>
-              </tr>
-            ) : !latestObs ? (
-              <tr>
-                <td colSpan={9} style={{ padding: '2rem', textAlign: 'center', color: 'var(--accent-ruby, #ef4444)' }}>
-                  Unable to connect to ATMOSYNC API. Please verify backend service health.
-                </td>
-              </tr>
             ) : (
               <tr>
-                <td colSpan={9} style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-                  No station telemetry records available.
+                <td colSpan={11} style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                  Awaiting station observations...
                 </td>
               </tr>
             )}
@@ -333,9 +301,14 @@ export default function StationTelemetryTable({ stations, latestObs }: StationTe
         </table>
       </div>
 
-      {/* "Show More Stations" Toggle Control */}
+      {/* "Show More Stations" Toggle Button */}
       {!isSearchActive && additionalCount > 0 && (
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.25rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '1rem' }}>
+          {showMore && (
+            <div style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', fontWeight: 600, marginBottom: '0.5rem' }}>
+              Additional Stations (Experimental) &bull; {additionalCount} more stations available
+            </div>
+          )}
           <button
             type="button"
             id="station-show-more-toggle-btn"
@@ -343,25 +316,17 @@ export default function StationTelemetryTable({ stations, latestObs }: StationTe
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.6rem 1.4rem',
+              gap: '0.45rem',
+              padding: '0.45rem 1.25rem',
               borderRadius: '9999px',
-              background: 'var(--bg-card)',
+              background: 'var(--bg-card-hover)',
               border: '1px solid var(--border-subtle)',
               color: 'var(--accent-cyan)',
-              fontSize: '0.85rem',
+              fontSize: '0.8rem',
               fontWeight: 600,
               cursor: 'pointer',
-              boxShadow: 'var(--shadow-sm)',
-              transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'var(--border-active)';
-              e.currentTarget.style.transform = 'translateY(-1px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'var(--border-subtle)';
-              e.currentTarget.style.transform = 'translateY(0)';
+              boxShadow: 'var(--shadow-xs)',
+              transition: 'all 0.2s ease',
             }}
           >
             <span>{showMore ? '▲' : '▼'}</span>
