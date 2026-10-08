@@ -337,6 +337,8 @@ export interface StationHistoryItem {
   timestamp_utc: string;
   pm25: number;
   pm10: number;
+  no2?: number;
+  o3?: number;
   temp_c: number;
   wind_speed_ms: number;
   pblh_m: number;

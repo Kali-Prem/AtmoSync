@@ -109,6 +109,8 @@ def get_station_observation_history(
             "timestamp_utc": row["timestamp_utc"],
             "pm25": round(float(row["pm25_ugm3"]), 1),
             "pm10": round(float(row["pm10_ugm3"]), 1),
+            "no2": round(float(row.get("no2_ugm3", 0.0) if pd.notnull(row.get("no2_ugm3")) else 0.0), 1),
+            "o3": round(float(row.get("o3_ugm3", 0.0) if pd.notnull(row.get("o3_ugm3")) else 0.0), 1),
             "temp_c": round(float(row["temp_2m_c"]), 1),
             "wind_speed_ms": round(float(row["wind_speed_10m_ms"]), 1),
             "pblh_m": round(float(row["pblh_m"]), 0),

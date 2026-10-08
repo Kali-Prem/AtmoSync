@@ -9,3 +9,4 @@ export { default as KpiCards } from './KpiCards';
 export { default as AirQualityMap } from './AirQualityMap';
 export { default as AnalyticsSection } from './AnalyticsSection';
 export { default as LiveMapViewer } from './LiveMapViewer';
+export { default as AirQualityDashboard } from './AirQualityDashboard';
