@@ -7,6 +7,7 @@ import {
   fetchStationForecast,
   fetchFireClusters,
   fetchPlumeRisk,
+  fetchStationHistory,
 } from '@/lib/api';
 import {
   HeroBanner,
@@ -28,6 +29,7 @@ export default async function DashboardPage() {
     forecast,
     fireClusters,
     plumeRisk,
+    stationHistory,
   ] = await Promise.all([
     fetchHealth(),
     fetchInversionStatus(),
@@ -37,6 +39,7 @@ export default async function DashboardPage() {
     fetchStationForecast('DL_ANAND_VIHAR'),
     fetchFireClusters(),
     fetchPlumeRisk(),
+    fetchStationHistory('DL_ANAND_VIHAR', 24),
   ]);
 
   const anandViharObs =
@@ -63,6 +66,7 @@ export default async function DashboardPage() {
         anandViharObs={anandViharObs}
         fireClusters={fireClusters}
         plumeRisk={plumeRisk}
+        stationHistory={stationHistory}
       />
     </div>
   );

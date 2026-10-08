@@ -7,7 +7,9 @@ const __dirname = path.dirname(__filename);
 function getApiDestination() {
   const rawUrl = (process.env.NEXT_PUBLIC_API_URL || process.env.API_URL || '').trim();
   if (!rawUrl) {
-    return 'http://127.0.0.1:8000/api/:path*';
+    return process.env.NODE_ENV === 'production'
+      ? 'https://atmosync-api.onrender.com/api/:path*'
+      : 'http://127.0.0.1:8000/api/:path*';
   }
   let base = rawUrl.replace(/\/+$/, '');
   if (base.endsWith('/api')) {

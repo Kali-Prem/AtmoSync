@@ -93,6 +93,21 @@ export default function StationTelemetryTable({
   const trimmedQuery = searchQuery.trim().toLowerCase();
   const isSearchActive = trimmedQuery.length > 0;
 
+  // Extract 5 default anchors and 3 experimental stations
+  const anchors = useMemo(() => {
+    const list = sortedStations.filter((s) => s.is_default_anchor);
+    return list.length > 0 ? list : DEFAULT_ANCHOR_STATIONS;
+  }, [sortedStations]);
+
+  const experimentalStations = useMemo(() => {
+    return sortedStations.filter(
+      (s) =>
+        s.extra_metadata?.is_experimental === true ||
+        s.extra_metadata?.category === 'experimental' ||
+        ['DL_MAJOR_DHYAN_CHAND', 'DL_ALIPUR', 'DL_VIVEK_VIHAR'].includes(s.station_code)
+    ).slice(0, 3);
+  }, [sortedStations]);
+
   const displayedStations = useMemo(() => {
     if (isSearchActive) {
       // When searching: search across ALL stations (including experimental/hidden)
@@ -108,17 +123,15 @@ export default function StationTelemetryTable({
       });
     }
 
-    // Default: 5 anchor stations, or all when showMore is true
+    // Default: 5 anchor stations. When showMore is toggled: 5 anchors + 3 experimental monitors
     if (showMore) {
-      return sortedStations;
+      return [...anchors, ...experimentalStations];
     }
 
-    const anchors = sortedStations.filter((s) => s.is_default_anchor);
-    return anchors.length > 0 ? anchors : DEFAULT_ANCHOR_STATIONS;
-  }, [sortedStations, trimmedQuery, isSearchActive, showMore]);
+    return anchors;
+  }, [sortedStations, trimmedQuery, isSearchActive, showMore, anchors, experimentalStations]);
 
-  const defaultAnchorsCount = sortedStations.filter((s) => s.is_default_anchor).length || 5;
-  const additionalCount = Math.max(0, sortedStations.length - defaultAnchorsCount);
+  const additionalCount = experimentalStations.length || 3;
 
   return (
     <div className="table-card" aria-label="Anchor Monitoring Stations Ground Telemetry">
@@ -253,15 +266,16 @@ export default function StationTelemetryTable({
                           <span
                             style={{
                               display: 'inline-block',
-                              padding: '0.18rem 0.5rem',
+                              padding: '0.2rem 0.55rem',
                               borderRadius: '6px',
                               fontWeight: 700,
-                              fontSize: '0.78rem',
+                              fontSize: '0.8rem',
                               background: aqiInfo?.bg,
                               color: aqiInfo?.color,
+                              border: `1px solid ${aqiInfo?.color}30`,
                             }}
                           >
-                            {rec.pm25} µg/m³
+                            {rec.pm25}
                           </span>
                         </td>
 
@@ -273,12 +287,12 @@ export default function StationTelemetryTable({
                               padding: '0.18rem 0.45rem',
                               borderRadius: '6px',
                               fontWeight: 600,
-                              fontSize: '0.76rem',
+                              fontSize: '0.78rem',
                               background: 'var(--bg-card-hover)',
                               color: 'var(--text-secondary)',
                             }}
                           >
-                            {rec.pm10} µg/m³
+                            {rec.pm10}
                           </span>
                         </td>
 
@@ -290,37 +304,37 @@ export default function StationTelemetryTable({
                               padding: '0.18rem 0.45rem',
                               borderRadius: '6px',
                               fontWeight: 600,
-                              fontSize: '0.76rem',
+                              fontSize: '0.78rem',
                               background: 'var(--bg-card-hover)',
                               color: 'var(--text-secondary)',
                             }}
                           >
-                            {rec.no2} µg/m³
+                            {rec.no2}
                           </span>
                         </td>
 
                         {/* TEMP */}
-                        <td style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+                        <td style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', fontWeight: 500 }}>
                           {rec.temp_c}&deg;C
                         </td>
 
                         {/* WIND */}
-                        <td style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-                          {rec.wind_speed_ms} m/s
+                        <td style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', fontWeight: 500 }}>
+                          {rec.wind_speed_ms}
                         </td>
 
                         {/* PBLH */}
                         <td style={{ fontSize: '0.78rem', color: 'var(--accent-cyan)', fontWeight: 600 }}>
-                          {Math.round(rec.pblh_m)} m
+                          {Math.round(rec.pblh_m)}
                         </td>
 
                         {/* ITSI */}
                         <td>
                           <span
                             className="badge badge-warning"
-                            style={{ fontSize: '0.65rem', padding: '0.15rem 0.4rem' }}
+                            style={{ fontSize: '0.68rem', padding: '0.15rem 0.45rem' }}
                           >
-                            {rec.itsi} / 100
+                            {rec.itsi}
                           </span>
                         </td>
 

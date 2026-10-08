@@ -1,3 +1,5 @@
+'use client';
+
 import { DataFreshness } from '@/lib/api';
 
 interface HeroBannerProps {
@@ -11,71 +13,105 @@ export default function HeroBanner({ freshness }: HeroBannerProps) {
 
   return (
     <section className="hero-card" aria-label="Command Center Overview">
-      {/* Subtle India Gate & Delhi Skyline Atmospheric Silhouette (5% visual effect, 95% clarity) */}
+      {/* Background Graphic Elements: Atmospheric Gradient, Solar Haze & Delhi Monuments */}
       <svg
         className="hero-backdrop-svg"
-        viewBox="0 0 500 300"
+        viewBox="0 0 680 260"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
+        preserveAspectRatio="xMidYMid meet"
       >
         <defs>
-          <linearGradient id="gateGrad" x1="250" y1="50" x2="250" y2="280" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#0284c7" stopOpacity="0.45" />
-            <stop stopColor="#2563eb" stopOpacity="0.08" />
+          <linearGradient id="gateGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#0284c7" stopOpacity="0.45" />
+            <stop offset="100%" stopColor="#0369a1" stopOpacity="0.15" />
           </linearGradient>
-          <radialGradient id="sunGlow" cx="320" cy="90" r="120" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#38bdf8" stopOpacity="0.3" />
-            <stop stopColor="#0284c7" stopOpacity="0" />
+
+          <linearGradient id="skylineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#0284c7" stopOpacity="0.08" />
+          </linearGradient>
+
+          <radialGradient id="sunHaze" cx="540" cy="80" r="140" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.35" />
+            <stop offset="60%" stopColor="#0284c7" stopOpacity="0.08" />
+            <stop offset="100%" stopColor="#0284c7" stopOpacity="0" />
           </radialGradient>
+
+          <linearGradient id="windStream" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#0284c7" stopOpacity="0.05" />
+            <stop offset="50%" stopColor="#0284c7" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#0284c7" stopOpacity="0.05" />
+          </linearGradient>
         </defs>
 
-        {/* Ambient atmospheric sun/haze glow */}
-        <circle cx="320" cy="90" r="100" fill="url(#sunGlow)" />
+        {/* Atmospheric Solar Haze Glow */}
+        <circle cx="540" cy="80" r="120" fill="url(#sunHaze)" />
 
-        {/* Atmospheric inversion wave contours */}
+        {/* Boundary Layer Wind Streamlines */}
         <path
-          d="M0 240 C 120 220, 240 260, 500 230"
-          stroke="#0284c7"
-          strokeWidth="1.5"
-          strokeOpacity="0.25"
-          strokeDasharray="4 4"
+          d="M 180 180 C 300 160, 420 200, 680 170"
+          stroke="url(#windStream)"
+          strokeWidth="1.8"
+          strokeDasharray="6 4"
         />
         <path
-          d="M0 270 C 180 250, 320 280, 500 255"
-          stroke="#0d9488"
-          strokeWidth="1.2"
-          strokeOpacity="0.2"
+          d="M 240 215 C 380 195, 500 230, 680 205"
+          stroke="url(#windStream)"
+          strokeWidth="1.4"
+          strokeDasharray="4 6"
         />
 
-        {/* India Gate Silhouette */}
-        <g fill="url(#gateGrad)">
-          {/* Main Base */}
-          <rect x="220" y="220" width="160" height="15" rx="2" />
-          <rect x="230" y="205" width="140" height="15" rx="2" />
-          {/* Main Pillars */}
-          <rect x="240" y="100" width="32" height="105" rx="1" />
-          <rect x="328" y="100" width="32" height="105" rx="1" />
-          {/* Central Arch */}
-          <path d="M 272 165 Q 300 135 328 165 L 328 205 L 272 205 Z" fill="#ffffff" fillOpacity="0.7" />
-          {/* Lintel & Attic */}
-          <rect x="235" y="82" width="130" height="18" rx="2" />
-          <rect x="245" y="66" width="110" height="16" rx="2" />
-          {/* Top Cornice Dome Base */}
-          <rect x="260" y="52" width="80" height="14" rx="2" />
-          <path d="M 275 52 Q 300 38 325 52 Z" />
+        {/* Distant Delhi Skyline Silhouette (Lotus Temple, Qutub Minar, Modern Towers) */}
+        <g fill="url(#skylineGrad)">
+          {/* Qutub Minar Silhouette */}
+          <polygon points="398,240 401,110 406,110 409,240" />
+          <rect x="399" y="106" width="9" height="5" rx="1" />
+          <polygon points="400,106 403.5,88 407,106" />
+
+          {/* Lotus Temple Petals Outline */}
+          <path d="M 440 240 C 440 210, 452 195, 465 195 C 478 195, 490 210, 490 240 Z" opacity="0.8" />
+          <path d="M 452 240 C 455 205, 465 185, 465 185 C 465 185, 475 205, 478 240 Z" fill="#ffffff" fillOpacity="0.5" />
+
+          {/* Institutional / Modern Skyline Towers */}
+          <rect x="350" y="190" width="18" height="50" rx="2" />
+          <rect x="372" y="175" width="14" height="65" rx="2" />
+          <rect x="610" y="180" width="22" height="60" rx="2" />
+          <rect x="636" y="165" width="18" height="75" rx="2" />
+          <rect x="658" y="190" width="20" height="50" rx="2" />
         </g>
 
-        {/* Regional Airshed Wind Transport Vectors */}
-        <g stroke="#0284c7" strokeWidth="1.2" strokeOpacity="0.3" strokeLinecap="round">
-          <path d="M 120 110 Q 180 90 240 105" />
-          <path d="M 160 140 Q 230 120 310 135" />
-          <path d="M 90 80 Q 150 65 210 75" />
+        {/* Foreground India Gate Monument */}
+        <g fill="url(#gateGrad)">
+          {/* Broad Monument Base */}
+          <rect x="500" y="228" width="96" height="12" rx="2" />
+          <rect x="508" y="218" width="80" height="11" rx="2" />
+
+          {/* Left and Right Arch Pillars */}
+          <rect x="514" y="130" width="19" height="90" rx="1" />
+          <rect x="563" y="130" width="19" height="90" rx="1" />
+
+          {/* Center Archway */}
+          <path
+            d="M 533 182 Q 548 152 563 182 L 563 218 L 533 218 Z"
+            fill="#ffffff"
+            fillOpacity="0.85"
+          />
+
+          {/* Cornice, Entablature & Lintel */}
+          <rect x="510" y="116" width="76" height="15" rx="2" />
+          <rect x="518" y="102" width="60" height="15" rx="2" />
+
+          {/* Top Attic & Dome Base */}
+          <rect x="526" y="90" width="44" height="13" rx="2" />
+          <path d="M 535 90 Q 548 78 561 90 Z" />
         </g>
       </svg>
 
+      {/* Main Content Area */}
       <div className="hero-content">
-        {/* Status & Verification Badges */}
+        {/* Verification Status Badges Row */}
         <div className="hero-badges">
           <span className="badge badge-success">
             Phase 4 — Real Data Pipeline &amp; Baseline Forecasting
@@ -88,16 +124,84 @@ export default function HeroBanner({ freshness }: HeroBannerProps) {
           </span>
         </div>
 
-        {/* Hero Title */}
+        {/* Hero Headline */}
         <h1 className="hero-title">
           ATMOSYNC <span className="hero-title-accent">Air Pollution Command Center</span>
         </h1>
 
-        {/* Subtitle */}
+        {/* Explanatory Subtitle */}
         <p className="hero-subtitle">
-          AI-Powered Air Pollution–Weather Coupled Forecasting System for Delhi NCR (SIH-26082).
+          Coupled Air Quality–Atmospheric Forecasting System for Delhi NCR (SIH-26082).
           Evaluated against 18,240 verified station-hour observations across winter 2023–2024.
         </p>
+
+        {/* Key System Capabilities Highlight Strip */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
+            marginTop: '1rem',
+            flexWrap: 'wrap',
+          }}
+        >
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              fontSize: '0.78rem',
+              fontWeight: 600,
+              color: 'var(--text-secondary)',
+              background: 'rgba(255, 255, 255, 0.7)',
+              backdropFilter: 'blur(8px)',
+              padding: '0.3rem 0.75rem',
+              borderRadius: '9999px',
+              border: '1px solid var(--border-subtle)',
+            }}
+          >
+            <span style={{ color: '#10b981', fontSize: '0.9rem' }}>&bull;</span>
+            <span>5 Anchor Ground Stations Telemetry</span>
+          </div>
+
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              fontSize: '0.78rem',
+              fontWeight: 600,
+              color: 'var(--text-secondary)',
+              background: 'rgba(255, 255, 255, 0.7)',
+              backdropFilter: 'blur(8px)',
+              padding: '0.3rem 0.75rem',
+              borderRadius: '9999px',
+              border: '1px solid var(--border-subtle)',
+            }}
+          >
+            <span style={{ color: '#0284c7', fontSize: '0.9rem' }}>&bull;</span>
+            <span>LightGBM 72h Coupled Inference</span>
+          </div>
+
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              fontSize: '0.78rem',
+              fontWeight: 600,
+              color: 'var(--text-secondary)',
+              background: 'rgba(255, 255, 255, 0.7)',
+              backdropFilter: 'blur(8px)',
+              padding: '0.3rem 0.75rem',
+              borderRadius: '9999px',
+              border: '1px solid var(--border-subtle)',
+            }}
+          >
+            <span style={{ color: '#8b5cf6', fontSize: '0.9rem' }}>&bull;</span>
+            <span>ERA5 Mesoscale Boundary Layer Coupled</span>
+          </div>
+        </div>
       </div>
     </section>
   );

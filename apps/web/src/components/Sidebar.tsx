@@ -26,7 +26,7 @@ export default function Sidebar({ systemStatus = 'healthy' }: SidebarProps) {
     },
     {
       label: 'Live Map',
-      href: '/map',
+      href: '/live-map',
       icon: (
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
@@ -125,7 +125,8 @@ export default function Sidebar({ systemStatus = 'healthy' }: SidebarProps) {
           {navItems.map((item, index) => {
             const isActive = item.exact
               ? pathname === item.href
-              : pathname.startsWith(item.href) && item.href !== '/';
+              : (pathname.startsWith(item.href) && item.href !== '/') ||
+                ((item.href === '/map' || item.href === '/live-map') && (pathname === '/map' || pathname === '/live-map'));
 
             // Special handle for unique keys when labels point to same href
             const key = `${item.label}-${index}`;
