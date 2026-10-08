@@ -276,13 +276,26 @@ export const DEFAULT_ANCHOR_OBSERVATIONS: StationObservationRecord[] = [
 export interface InversionStatus {
   status: string;
   timestamp?: string;
+  timestamp_utc?: string;
   temperature_2m?: number;
+  temperature_2m_c?: number;
+  temperature_180m_c?: number;
   boundary_layer_height_m?: number;
   wind_speed_10m?: number;
+  wind_speed_10m_ms?: number;
   near_surface_lapse_rate?: number;
+  near_surface_lapse_rate_c_100m?: number;
+  inversion_present?: boolean;
   inversion_class?: string;
+  inversion_strength?: number;
+  inversion_base_height_m?: number | null;
+  inversion_top_height_m?: number | null;
+  inversion_detection_method?: string;
+  inversion_quality_flag?: string;
   trapping_severity_index?: number;
   ventilation_index?: number;
+  ventilation_index_m2s?: number;
+  stagnation_indicator?: number;
   risk_summary?: string;
   message?: string;
 }
@@ -291,6 +304,8 @@ export interface ForecastStep {
   horizon_hours: number;
   target_time_utc: string;
   predicted_pm25_ugm3: number;
+  pm10_ugm3?: number;
+  o3_ugm3?: number;
   derived_aqi: number;
   aqi_category: string;
   model_type: string;
@@ -303,6 +318,7 @@ export interface StationForecastResponse {
   initialization_time_utc: string;
   latest_observed_pm25: number;
   forecast_horizons: ForecastStep[];
+  hourly_forecasts?: ForecastStep[];
   data_freshness: {
     dataset_source: string;
     last_pipeline_run: string;
@@ -343,6 +359,8 @@ export interface StationHistoryItem {
   wind_speed_ms: number;
   pblh_m: number;
   itsi: number;
+  lapse_rate_c_100m?: number;
+  rh_pct?: number;
 }
 
 export interface StationHistoryResponse {
@@ -428,8 +446,9 @@ export async function fetchStations(): Promise<MonitoringStation[]> {
   return processed;
 }
 
-export async function fetchInversionStatus(): Promise<InversionStatus | null> {
-  return safeApiFetch<InversionStatus>("/api/v1/inversion/status");
+export async function fetchInversionStatus(stationCode?: string): Promise<InversionStatus | null> {
+  const query = stationCode ? `?station_code=${encodeURIComponent(stationCode)}` : "";
+  return safeApiFetch<InversionStatus>(`/api/v1/inversion/status${query}`);
 }
 
 export async function fetchStationForecast(stationCode: string): Promise<StationForecastResponse | null> {
@@ -470,10 +489,89 @@ export async function fetchAtmosphereCurrent(): Promise<any | null> {
   return safeApiFetch<any>("/api/v1/atmosphere/current");
 }
 
-export async function fetchFireClusters(): Promise<any | null> {
-  return safeApiFetch<any>("/api/v1/fires/clusters");
+export interface FireCluster {
+  event_id: string;
+  start_time: string;
+  centroid_latitude: number;
+  centroid_longitude: number;
+  detection_count: number;
+  total_frp_mw: number;
+  max_single_frp_mw: number;
+  estimated_pm25_flux_kg_s: number;
+  source_region: string;
+  classification: string;
+  confidence_summary: string;
 }
 
-export async function fetchPlumeRisk(): Promise<any | null> {
-  return safeApiFetch<any>("/api/v1/plume/risk");
+export interface FireClustersResponse {
+  status: string;
+  clusters_count: number;
+  total_active_frp_mw: number;
+  total_pm25_emission_flux_kg_s: number;
+  clusters: FireCluster[];
+}
+
+export interface TrajectoryStep {
+  step_hours: number;
+  valid_time: string;
+  latitude: number;
+  longitude: number;
+  distance_traveled_km: number;
+  distance_to_delhi_km: number;
+  plume_spread_radius_km: number;
+  intersects_target_domain: boolean;
+}
+
+export interface SampleTrajectory {
+  event_id: string;
+  source_region: string;
+  total_frp_mw: number;
+  trajectory_steps: TrajectoryStep[];
+}
+
+export interface PlumeRiskResponse {
+  plume_influence_score: number;
+  plume_influence_level: string;
+  active_upwind_fires_count: number;
+  total_upwind_frp_mw: number;
+  mean_directional_alignment: number;
+  intersecting_clusters_count: number;
+  eta_hours: number | null;
+  plume_confidence: string;
+  model_description: string;
+  summary: string;
+  clusters_analyzed: number;
+  sample_trajectories: SampleTrajectory[];
+  ambient_meteorology?: {
+    wind_speed_10m_ms: number;
+    wind_direction_10m_deg: number;
+    pbl_height_m: number;
+    inversion_strength_c_100m: number;
+  };
+}
+
+export interface ActiveFireRecord {
+  id: number;
+  source: string;
+  latitude: number;
+  longitude: number;
+  acq_time: string;
+  frp_mw: number;
+  brightness_temp_k?: number;
+  confidence?: string;
+  daynight?: string;
+  state: string;
+}
+
+export async function fetchFireClusters(): Promise<FireClustersResponse | null> {
+  return safeApiFetch<FireClustersResponse>("/api/v1/fires/clusters");
+}
+
+export async function fetchPlumeRisk(): Promise<PlumeRiskResponse | null> {
+  return safeApiFetch<PlumeRiskResponse>("/api/v1/plume/risk");
+}
+
+export async function fetchActiveFires(limit: number = 200): Promise<ActiveFireRecord[]> {
+  const res = await safeApiFetch<ActiveFireRecord[]>(`/api/v1/fires/active?limit=${limit}`);
+  return Array.isArray(res) ? res : [];
 }

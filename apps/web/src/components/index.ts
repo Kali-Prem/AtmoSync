@@ -10,3 +10,6 @@ export { default as AirQualityMap } from './AirQualityMap';
 export { default as AnalyticsSection } from './AnalyticsSection';
 export { default as LiveMapViewer } from './LiveMapViewer';
 export { default as AirQualityDashboard } from './AirQualityDashboard';
+export { default as InversionDashboard } from './InversionDashboard';
+export { default as PlumeDashboard } from './PlumeDashboard';
+export { default as ForecastDashboard } from './ForecastDashboard';

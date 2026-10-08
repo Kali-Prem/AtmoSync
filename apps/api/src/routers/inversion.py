@@ -4,6 +4,7 @@ Provides multi-level vertical profile analysis, continuous inversion strength,
 Inversion Trapping Severity Index (ITSI: 0 - 100), and forecast stability.
 """
 from typing import Dict, Any, List, Optional
+import pandas as pd
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from database.connection import get_db
@@ -15,27 +16,40 @@ router = APIRouter(prefix="/inversion", tags=["Atmospheric Inversion & Stability
 
 @router.get("/status")
 @router.get("/current")
-def get_inversion_status(db: Session = Depends(get_db)):
+def get_inversion_status(
+    station_code: Optional[str] = Query(None, description="Optional station code to retrieve station-specific inversion diagnostics"),
+    db: Session = Depends(get_db)
+):
     """
     Computes current atmospheric inversion diagnostics, vertical structure,
     and Inversion Trapping Severity Index (ITSI) from the latest meteorological readings.
     """
-    latest_weather = db.query(WeatherObservation).order_by(WeatherObservation.time.desc()).first()
+    latest_weather = None
+    if not station_code:
+        latest_weather = db.query(WeatherObservation).order_by(WeatherObservation.time.desc()).first()
+    else:
+        loc_id = f"loc_{station_code.lower()}"
+        latest_weather = db.query(WeatherObservation).filter(WeatherObservation.location_id == loc_id).order_by(WeatherObservation.time.desc()).first()
+
     if latest_weather and latest_weather.temperature_2m is not None:
-        lapse = latest_weather.lapse_rate_low or 0.0
-        pblh = latest_weather.boundary_layer_height_m or 400.0
-        ws = latest_weather.wind_speed_10m or 2.0
+        lapse = latest_weather.lapse_rate_low if latest_weather.lapse_rate_low is not None else 0.45
+        pblh = latest_weather.boundary_layer_height_m or 150.0
+        ws = latest_weather.wind_speed_10m or 1.8
         t2m = latest_weather.temperature_2m
         time_iso = latest_weather.time.isoformat()
     else:
         from apps.api.src.routers.observations import get_observation_dataframe
         df = get_observation_dataframe()
         if df is not None and not df.empty:
-            row = df.iloc[-1]
-            lapse = float(row.get("lapse_rate_c_100m", 0.45) or 0.45)
-            pblh = float(row.get("pblh_m", 285.0) or 285.0)
-            ws = float(row.get("wind_speed_10m_ms", 1.8) or 1.8)
-            t2m = float(row.get("temp_2m_c", 20.0) or 20.0)
+            if station_code:
+                stn_df = df[df["station_code"] == station_code]
+                row = stn_df.iloc[-1] if not stn_df.empty else df.iloc[-1]
+            else:
+                row = df.iloc[-1]
+            lapse = float(row.get("lapse_rate_c_100m", 0.45) if pd.notnull(row.get("lapse_rate_c_100m")) else 0.45)
+            pblh = float(row.get("pblh_m", 150.0) if pd.notnull(row.get("pblh_m")) else 150.0)
+            ws = float(row.get("wind_speed_10m_ms", 1.8) if pd.notnull(row.get("wind_speed_10m_ms")) else 1.8)
+            t2m = float(row.get("temp_2m_c", 14.3) if pd.notnull(row.get("temp_2m_c")) else 14.3)
             time_iso = str(row.get("timestamp_utc", "2024-02-29T23:00:00Z"))
         else:
             return {

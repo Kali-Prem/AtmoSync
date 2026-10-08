@@ -1574,3 +1574,1081 @@ input:checked + .slider-round:before {
   margin: 0.65rem 0;
 }
 
+/* ==================================================== */
+/* INVERSION DASHBOARD — PHASE 5 COMPLETE REDESIGN     */
+/* ==================================================== */
+.inversion-dashboard {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inversion-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.inversion-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.inversion-heading {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--brand-navy);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.inversion-subtitle {
+  color: var(--text-secondary);
+  margin-top: 0.4rem;
+  font-size: 0.88rem;
+  max-width: 780px;
+  line-height: 1.55;
+}
+
+.inversion-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.inversion-time-pills {
+  display: flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 9999px;
+  padding: 3px;
+  box-shadow: var(--shadow-xs);
+}
+
+.inversion-time-btn {
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.inversion-time-btn:hover {
+  color: var(--accent-cyan);
+}
+
+.inversion-time-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.35);
+}
+
+.inversion-date-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 0.4rem 0.85rem;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+}
+
+.inversion-causality-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(2, 132, 199, 0.04);
+  border: 1px solid rgba(2, 132, 199, 0.16);
+  border-radius: 12px;
+  padding: 0.65rem 1.25rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.causality-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.causality-step.highlight {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  padding: 0.2rem 0.65rem;
+}
+
+.causality-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.causality-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.causality-arrow {
+  color: var(--accent-cyan);
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.inversion-error-banner {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.inversion-retry-btn {
+  background: #dc2626;
+  color: #ffffff;
+  border: none;
+  padding: 0.35rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* 4 Primary KPI Cards */
+.inversion-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.inversion-kpi-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  padding: 1.25rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.inversion-kpi-card:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.kpi-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.kpi-card-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.kpi-card-val {
+  font-size: 2.1rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  line-height: 1.15;
+}
+
+.kpi-card-val-unit {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.kpi-card-supporting {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+
+.kpi-sparkline-wrap {
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.kpi-card-footer {
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* Large Two-Column Section */
+.inversion-vis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.inversion-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  padding: 1.35rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.inversion-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.inversion-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.inversion-card-sub {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+
+.station-selector-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.inversion-station-dropdown {
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.inversion-station-dropdown:focus {
+  border-color: var(--accent-cyan);
+}
+
+.inversion-chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legend-bar {
+  width: 14px;
+  height: 9px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.legend-line {
+  width: 16px;
+  height: 0px;
+  display: inline-block;
+}
+
+.profile-chart-container {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profile-svg {
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  overflow: visible;
+  display: block;
+}
+
+.inversion-explanation-banner {
+  margin-top: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  background: rgba(2, 132, 199, 0.05);
+  border: 1px solid rgba(2, 132, 199, 0.15);
+  border-radius: 8px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.inversion-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.crosssection-placeholder-box {
+  position: relative;
+  height: 165px;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card-hover);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.6rem;
+}
+
+.crosssection-grid-lines {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  pointer-events: none;
+}
+
+.crosssection-axis-y {
+  width: 75px;
+  padding: 0.5rem 0.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.64rem;
+  color: var(--text-muted);
+  border-right: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+}
+
+.crosssection-grid-content {
+  flex: 1;
+  position: relative;
+}
+
+.crosssection-inversion-band {
+  position: absolute;
+  top: 25%;
+  bottom: 35%;
+  left: 0;
+  right: 0;
+  background: rgba(239, 68, 68, 0.08);
+  border-top: 1px dashed rgba(239, 68, 68, 0.3);
+  border-bottom: 1px dashed rgba(239, 68, 68, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.75rem;
+}
+
+.crosssection-band-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #b91c1c;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.crosssection-pblh-line {
+  position: absolute;
+  bottom: 35%;
+  left: 0;
+  right: 0;
+  border-top: 1.5px dashed #0284c7;
+}
+
+.crosssection-status-banner {
+  position: relative;
+  z-index: 2;
+  margin: auto;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border-card);
+  border-radius: 10px;
+  padding: 0.65rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .crosssection-status-banner {
+  background: rgba(15, 23, 42, 0.92);
+}
+
+.crosssection-axis-x {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  padding-left: 75px;
+  padding-right: 10px;
+  z-index: 3;
+}
+
+.itsi-formula-badge {
+  padding: 0.3rem 0.75rem;
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+  border-radius: 8px;
+}
+
+/* Two Bottom Cards */
+.inversion-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.meteorological-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.meteo-metric-box {
+  background: var(--bg-card-hover);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.85rem 0.65rem;
+  text-align: center;
+}
+
+.meteo-metric-val {
+  font-size: 1.35rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+}
+
+.meteo-metric-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.meteo-interpretation-box {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(2, 132, 199, 0.06);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+}
+
+.inversion-insights-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  flex: 1;
+}
+
+.insight-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.insight-bullet {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.inversion-action-footer {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.inversion-view-analysis-link {
+  color: var(--accent-cyan);
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.inversion-view-analysis-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .inversion-kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .inversion-vis-grid {
+    grid-template-columns: 1fr;
+  }
+  .inversion-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .inversion-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+  .meteorological-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .inversion-header-row {
+    flex-direction: column;
+  }
+  .inversion-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* ==========================================================================
+   Plume & Fires Dashboard (SIH-26082 Phase 5 Biomass Transport)
+   ========================================================================== */
+
+.plume-dashboard {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.plume-main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.62fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.plume-map-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.plume-map-viewport-wrapper {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: #f1f5f9;
+}
+
+.plume-map-container {
+  width: 100%;
+  height: 100%;
+}
+
+.plume-map-controls {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 10;
+}
+
+.plume-ctrl-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.plume-ctrl-btn:hover {
+  background: #ffffff;
+  color: var(--brand-blue);
+  border-color: var(--border-active);
+  transform: translateY(-1px);
+}
+
+.plume-floating-legend {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-md);
+  z-index: 10;
+  font-size: 11px;
+}
+
+[data-theme="dark"] .plume-floating-legend {
+  background: rgba(15, 23, 42, 0.92);
+}
+
+.legend-gradient-scale {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.scale-pill {
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+}
+
+.plume-layer-toggles-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 0.85rem 0.25rem 0.25rem 0.25rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.layer-checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+  font-size: 0.78rem;
+  transition: color 0.15s ease;
+}
+
+.layer-checkbox-label:hover {
+  color: var(--brand-blue);
+}
+
+.layer-checkbox-label input[type="checkbox"] {
+  accent-color: var(--brand-blue);
+  cursor: pointer;
+}
+
+.plume-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.crosssection-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 10px;
+  background: var(--bg-card-hover);
+}
+
+.crosssection-inner {
+  display: flex;
+  height: 125px;
+  width: 100%;
+  gap: 6px;
+}
+
+.crosssection-canvas-unavailable {
+  flex: 1;
+  border: 1px dashed var(--border-subtle);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  padding: 10px;
+}
+
+[data-theme="dark"] .crosssection-canvas-unavailable {
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.plume-table-insights-grid {
+  display: flex;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+@media (max-width: 1200px) {
+  .plume-main-grid {
+    grid-template-columns: 1fr;
+  }
+  .plume-table-insights-grid {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 680px) {
+  .plume-map-viewport-wrapper {
+    height: 380px;
+  }
+  .plume-layer-toggles-bar {
+    gap: 10px;
+  }
+  .plume-floating-legend {
+    max-width: calc(100% - 24px);
+  }
+}
+
+/* ==========================================================================
+   72-Hour Forecast Dashboard (SIH-26082 Phase 4 Multi-Horizon LightGBM)
+   ========================================================================== */
+
+.forecast-dashboard {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.forecast-station-selector-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 14px;
+  padding: 0.85rem 1.25rem;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.selector-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.selector-pills-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.forecast-station-pill {
+  background: var(--bg-card-hover);
+  border: 1px solid var(--border-subtle);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.forecast-station-pill:hover {
+  background: #ffffff;
+  border-color: var(--border-active);
+  color: var(--brand-blue);
+  transform: translateY(-1px);
+}
+
+.forecast-station-pill.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.28);
+}
+
+.forecast-main-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.forecast-map-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.horizon-pills-bar {
+  display: flex;
+  gap: 4px;
+  background: rgba(15, 23, 42, 0.05);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+}
+
+.horizon-pill-btn {
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.horizon-pill-btn:hover {
+  color: var(--text-primary);
+}
+
+.horizon-pill-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.forecast-surface-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  color: #0369a1;
+  background: #e0f2fe;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #bae6fd;
+  margin-bottom: 0.65rem;
+}
+
+.forecast-map-viewport-wrapper {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: #f1f5f9;
+}
+
+.forecast-map-container {
+  width: 100%;
+  height: 100%;
+}
+
+.forecast-floating-legend {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-md);
+  z-index: 10;
+  font-size: 11px;
+}
+
+[data-theme="dark"] .forecast-floating-legend {
+  background: rgba(15, 23, 42, 0.92);
+}
+
+.forecast-chart-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.forecast-param-select-wrap select {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.forecast-horizons-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.horizon-compact-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.horizon-compact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--brand-blue);
+}
+
+.horizon-compact-card.active {
+  border-color: #0284c7;
+  box-shadow: 0 0 12px rgba(2, 132, 199, 0.18);
+}
+
+.horizon-card-lead {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #0284c7;
+}
+
+.horizon-card-aqi {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.horizon-card-pm25 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 6px 0 2px 0;
+  font-family: var(--font-heading);
+}
+
+[data-theme="dark"] .horizon-card-pm25 {
+  color: #f8fafc;
+}
+
+.horizon-card-cat {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.horizon-card-meta {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.forecast-bottom-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.62fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.forecast-table-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.forecast-right-insights-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.confidence-pill {
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  border: 1px solid var(--border-subtle);
+  font-size: 0.72rem;
+}
+
+@media (max-width: 1200px) {
+  .forecast-main-grid {
+    grid-template-columns: 1fr;
+  }
+  .forecast-horizons-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  .forecast-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .forecast-horizons-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .forecast-map-viewport-wrapper {
+    height: 320px;
+  }
+}
+

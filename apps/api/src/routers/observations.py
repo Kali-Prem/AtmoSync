@@ -102,9 +102,22 @@ def get_station_observation_history(
 
     stn_df.sort_values("timestamp_utc", ascending=False, inplace=True)
     recent = stn_df.head(limit).iloc[::-1]  # Return in chronological order
-
     history = []
     for _, row in recent.iterrows():
+        pbl_val = round(float(row["pblh_m"]), 0)
+        ws_val = round(float(row["wind_speed_10m_ms"]), 1)
+        itsi_val = round(float(row["itsi"]), 1)
+
+        # Retrieve direct lapse rate or derive from scientific inversion balance
+        lapse_val = row.get("lapse_rate_c_100m")
+        if pd.isnull(lapse_val):
+            f_pbl = max(0.0, min(1.0, (800.0 - pbl_val) / 750.0))
+            f_wind = max(0.0, min(1.0, (4.0 - ws_val) / 3.5))
+            f_gamma = max(0.0, (itsi_val / 100.0 - 0.35 * f_pbl - 0.20 * f_wind) / 0.45)
+            lapse_val = round(f_gamma * 3.0, 2)
+        else:
+            lapse_val = round(float(lapse_val), 2)
+
         history.append({
             "timestamp_utc": row["timestamp_utc"],
             "pm25": round(float(row["pm25_ugm3"]), 1),
@@ -112,9 +125,11 @@ def get_station_observation_history(
             "no2": round(float(row.get("no2_ugm3", 0.0) if pd.notnull(row.get("no2_ugm3")) else 0.0), 1),
             "o3": round(float(row.get("o3_ugm3", 0.0) if pd.notnull(row.get("o3_ugm3")) else 0.0), 1),
             "temp_c": round(float(row["temp_2m_c"]), 1),
-            "wind_speed_ms": round(float(row["wind_speed_10m_ms"]), 1),
-            "pblh_m": round(float(row["pblh_m"]), 0),
-            "itsi": round(float(row["itsi"]), 1)
+            "wind_speed_ms": ws_val,
+            "pblh_m": pbl_val,
+            "itsi": itsi_val,
+            "lapse_rate_c_100m": lapse_val,
+            "rh_pct": round(float(row.get("rh_2m_pct", 70.0) if pd.notnull(row.get("rh_2m_pct")) else 70.0), 1)
         })
 
     return {
