@@ -145,59 +145,17 @@ export default function HeroBanner({ freshness }: HeroBannerProps) {
             flexWrap: 'wrap',
           }}
         >
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              fontSize: '0.78rem',
-              fontWeight: 600,
-              color: 'var(--text-secondary)',
-              background: 'rgba(255, 255, 255, 0.7)',
-              backdropFilter: 'blur(8px)',
-              padding: '0.3rem 0.75rem',
-              borderRadius: '9999px',
-              border: '1px solid var(--border-subtle)',
-            }}
-          >
+          <div className="hero-capability-pill">
             <span style={{ color: '#10b981', fontSize: '0.9rem' }}>&bull;</span>
             <span>5 Anchor Ground Stations Telemetry</span>
           </div>
 
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              fontSize: '0.78rem',
-              fontWeight: 600,
-              color: 'var(--text-secondary)',
-              background: 'rgba(255, 255, 255, 0.7)',
-              backdropFilter: 'blur(8px)',
-              padding: '0.3rem 0.75rem',
-              borderRadius: '9999px',
-              border: '1px solid var(--border-subtle)',
-            }}
-          >
+          <div className="hero-capability-pill">
             <span style={{ color: '#0284c7', fontSize: '0.9rem' }}>&bull;</span>
             <span>LightGBM 72h Coupled Inference</span>
           </div>
 
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              fontSize: '0.78rem',
-              fontWeight: 600,
-              color: 'var(--text-secondary)',
-              background: 'rgba(255, 255, 255, 0.7)',
-              backdropFilter: 'blur(8px)',
-              padding: '0.3rem 0.75rem',
-              borderRadius: '9999px',
-              border: '1px solid var(--border-subtle)',
-            }}
-          >
+          <div className="hero-capability-pill">
             <span style={{ color: '#8b5cf6', fontSize: '0.9rem' }}>&bull;</span>
             <span>ERA5 Mesoscale Boundary Layer Coupled</span>
           </div>

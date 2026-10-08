@@ -9,14 +9,15 @@
   /* Crisp, Modern Light Palette (Flipkart/SaaS Inspired) */
   --bg-primary: #f0f4f9;
   --bg-secondary: #f8fafc;
-  --bg-card: rgba(255, 255, 255, 0.94);
-  --bg-card-hover: rgba(248, 250, 252, 0.98);
+  --bg-card: rgba(255, 255, 255, 0.90);
+  --bg-card-hover: rgba(248, 250, 252, 0.96);
   --bg-card-solid: #ffffff;
   --bg-glass: rgba(255, 255, 255, 0.88);
   --bg-glass-accent: rgba(2, 132, 199, 0.08);
 
-  --border-subtle: #e2e8f0;
-  --border-card: rgba(226, 232, 240, 0.85);
+  --border-subtle: rgba(80, 120, 160, 0.12);
+  --border-card: rgba(120, 170, 220, 0.22);
+  --border-card-hover: rgba(30, 140, 220, 0.32);
   --border-active: #0284c7;
   --border-focus: #38bdf8;
 
@@ -45,13 +46,40 @@
   --naqi-very-poor: #dc2626;
   --naqi-severe: #991b1b;
 
-  /* Soft Shadows */
+  /* Atmospheric Elevation & Premium Card Tokens (Depth Hierarchy) */
   --shadow-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
   --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
   --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
   --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.03);
-  --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+
+  /* LEVEL 1: Primary KPI Cards — Strongest Elevation */
+  --shadow-card-level1: 0 10px 28px rgba(30, 70, 120, 0.08), 0 2px 6px rgba(30, 70, 120, 0.04);
+  --shadow-card-level1-hover: 0 16px 36px rgba(30, 90, 150, 0.13), 0 4px 10px rgba(30, 90, 150, 0.06);
+
+  /* LEVEL 2: Content Cards (Maps, Tables, Charts) — Balanced Depth */
+  --shadow-card-level2: 0 8px 25px rgba(30, 70, 120, 0.07), 0 2px 5px rgba(30, 70, 120, 0.03);
+  --shadow-card-level2-hover: 0 14px 32px rgba(30, 90, 150, 0.12), 0 3px 8px rgba(30, 90, 150, 0.05);
+
+  /* LEVEL 3: Small Cards (Forecast pills, Info cards, Secondary tiles) — Subtle Depth */
+  --shadow-card-level3: 0 4px 14px rgba(30, 70, 120, 0.05), 0 1px 3px rgba(30, 70, 120, 0.02);
+  --shadow-card-level3-hover: 0 8px 20px rgba(30, 90, 150, 0.09), 0 2px 5px rgba(30, 90, 150, 0.04);
+
+  /* Card Interaction & Surface Tokens */
+  --shadow-card: var(--shadow-card-level2);
+  --shadow-card-hover: var(--shadow-card-level2-hover);
+  --shadow-card-active: 0 3px 10px rgba(30, 70, 120, 0.05), 0 1px 2px rgba(30, 70, 120, 0.02);
+  --card-top-highlight: inset 0 1px 1px 0 rgba(255, 255, 255, 0.85);
+  --card-top-grad: linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.15) 100%);
+  --card-reflection: radial-gradient(circle at 85% 15%, rgba(2, 132, 199, 0.08) 0%, transparent 65%);
+  --card-focus-ring: 0 0 0 3px rgba(20, 140, 220, 0.16);
   --shadow-glow: 0 0 18px rgba(2, 132, 199, 0.14);
+
+  /* Ambient KPI Colored Glow Tokens */
+  --glow-rose: 0 0 20px -2px rgba(225, 29, 72, 0.12);
+  --glow-cyan: 0 0 20px -2px rgba(2, 132, 199, 0.14);
+  --glow-emerald: 0 0 20px -2px rgba(5, 150, 105, 0.12);
+  --glow-purple: 0 0 20px -2px rgba(99, 102, 241, 0.13);
+  --glow-amber: 0 0 20px -2px rgba(217, 119, 6, 0.13);
 
   /* Ambient Atmospheric Gradients */
   --bg-radial-1: rgba(2, 132, 199, 0.06);
@@ -59,28 +87,28 @@
   --bg-radial-3: rgba(13, 148, 136, 0.04);
 
   /* Badges */
-  --badge-info-bg: #e0f2fe;
+  --badge-info-bg: rgba(2, 132, 199, 0.09);
   --badge-info-color: #0369a1;
-  --badge-info-border: #bae6fd;
+  --badge-info-border: rgba(2, 132, 199, 0.22);
 
-  --badge-warning-bg: #fef3c7;
+  --badge-warning-bg: rgba(245, 158, 11, 0.10);
   --badge-warning-color: #b45309;
-  --badge-warning-border: #fde68a;
+  --badge-warning-border: rgba(245, 158, 11, 0.24);
 
-  --badge-success-bg: #d1fae5;
+  --badge-success-bg: rgba(16, 185, 129, 0.10);
   --badge-success-color: #047857;
-  --badge-success-border: #a7f3d0;
+  --badge-success-border: rgba(16, 185, 129, 0.24);
 
-  --badge-danger-bg: #fee2e2;
+  --badge-danger-bg: rgba(239, 68, 68, 0.10);
   --badge-danger-color: #b91c1c;
-  --badge-danger-border: #fecaca;
+  --badge-danger-border: rgba(239, 68, 68, 0.24);
 
-  --badge-neutral-bg: #f1f5f9;
+  --badge-neutral-bg: rgba(100, 116, 139, 0.09);
   --badge-neutral-color: #334155;
-  --badge-neutral-border: #cbd5e1;
+  --badge-neutral-border: rgba(100, 116, 139, 0.20);
 
   --table-header-bg: #f8fafc;
-  --table-row-hover: rgba(2, 132, 199, 0.04);
+  --table-row-hover: rgba(2, 132, 199, 0.035);
 
   /* Layout dimensions */
   --header-height: 72px;
@@ -91,13 +119,14 @@
   --bg-primary: #0a1120;
   --bg-secondary: #0f172a;
   --bg-card: rgba(15, 23, 42, 0.88);
-  --bg-card-hover: rgba(30, 41, 59, 0.95);
+  --bg-card-hover: rgba(24, 36, 62, 0.94);
   --bg-card-solid: #0f172a;
   --bg-glass: rgba(15, 23, 42, 0.85);
   --bg-glass-accent: rgba(56, 189, 248, 0.12);
 
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-card: rgba(255, 255, 255, 0.1);
+  --border-card: rgba(120, 170, 220, 0.18);
+  --border-card-hover: rgba(56, 189, 248, 0.35);
   --border-active: #38bdf8;
   --border-focus: #38bdf8;
 
@@ -127,8 +156,34 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
-  --shadow-card: 0 6px 24px rgba(0, 0, 0, 0.35);
+
+  /* Level 1: Major KPI Cards */
+  --shadow-card-level1: 0 10px 28px rgba(0, 0, 0, 0.50), 0 2px 6px rgba(0, 0, 0, 0.25);
+  --shadow-card-level1-hover: 0 16px 36px rgba(0, 0, 0, 0.65), 0 4px 10px rgba(0, 0, 0, 0.35);
+
+  /* Level 2: Content Cards */
+  --shadow-card-level2: 0 8px 25px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.22);
+  --shadow-card-level2-hover: 0 14px 32px rgba(0, 0, 0, 0.60), 0 3px 8px rgba(0, 0, 0, 0.28);
+
+  /* Level 3: Small Cards */
+  --shadow-card-level3: 0 4px 14px rgba(0, 0, 0, 0.32), 0 1px 3px rgba(0, 0, 0, 0.15);
+  --shadow-card-level3-hover: 0 8px 20px rgba(0, 0, 0, 0.45), 0 2px 5px rgba(0, 0, 0, 0.22);
+
+  --shadow-card: var(--shadow-card-level2);
+  --shadow-card-hover: var(--shadow-card-level2-hover);
+  --shadow-card-active: 0 3px 10px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.12);
+  --card-top-highlight: inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
+  --card-top-grad: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 100%);
+  --card-reflection: radial-gradient(circle at 85% 15%, rgba(56, 189, 248, 0.10) 0%, transparent 65%);
+  --card-focus-ring: 0 0 0 3px rgba(56, 189, 248, 0.25);
   --shadow-glow: 0 0 20px rgba(56, 189, 248, 0.18);
+
+  /* Ambient KPI Colored Glow Tokens */
+  --glow-rose: 0 0 20px -2px rgba(244, 63, 94, 0.18);
+  --glow-cyan: 0 0 20px -2px rgba(56, 189, 248, 0.20);
+  --glow-emerald: 0 0 20px -2px rgba(16, 185, 129, 0.18);
+  --glow-purple: 0 0 20px -2px rgba(129, 140, 248, 0.20);
+  --glow-amber: 0 0 20px -2px rgba(245, 158, 11, 0.18);
 
   --bg-radial-1: rgba(56, 189, 248, 0.07);
   --bg-radial-2: rgba(99, 102, 241, 0.05);
@@ -191,29 +246,523 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
-/* Glassmorphism Card Utility */
-.glass-panel {
+/* ==========================================================================
+   Global Card Design System (ATMOSYNC Elevation, Depth & Micro-Interactions)
+   ========================================================================== */
+
+/* 1. Universal Card Foundation (Controlled glassmorphism, crisp opacity & depth) */
+.card-base,
+.glass-panel,
+.card-premium,
+.card-content,
+.card-kpi,
+.card-secondary,
+.kpi-card,
+.inversion-kpi-card,
+.aq-kpi-card,
+.map-card,
+.table-card,
+.analytics-card,
+.live-map-card,
+.inversion-card,
+.aq-card,
+.plume-map-card,
+.forecast-map-card,
+.forecast-chart-card,
+.forecast-table-card,
+.domain-cards-container,
+.hero-card,
+.empty-state {
+  background: var(--bg-card);
+  background-image: var(--card-top-grad);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-card);
+  position: relative;
+  overflow: hidden;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 220ms ease-out,
+              background-color 220ms ease-out;
+}
+
+/* 2. Hover Light Reflection Layer (Soft radial highlight in upper-right) */
+.card-base::before,
+.glass-panel::before,
+.card-premium::before,
+.card-content::before,
+.card-kpi::before,
+.card-secondary::before,
+.kpi-card::before,
+.inversion-kpi-card::before,
+.aq-kpi-card::before,
+.map-card::before,
+.table-card::before,
+.analytics-card::before,
+.live-map-card::before,
+.inversion-card::before,
+.aq-card::before,
+.plume-map-card::before,
+.forecast-map-card::before,
+.forecast-chart-card::before,
+.forecast-table-card::before,
+.domain-cards-container::before,
+.hero-card::before,
+.horizon-compact-card::before,
+.domain-card::before,
+.sidebar-panel-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 160px;
+  height: 160px;
+  background: var(--card-reflection);
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 220ms ease-out;
+  z-index: 1;
+}
+
+.card-base:hover::before,
+.glass-panel:hover::before,
+.card-premium:hover::before,
+.card-content:hover::before,
+.card-kpi:hover::before,
+.card-secondary:hover::before,
+.kpi-card:hover::before,
+.inversion-kpi-card:hover::before,
+.aq-kpi-card:hover::before,
+.map-card:hover::before,
+.table-card:hover::before,
+.analytics-card:hover::before,
+.live-map-card:hover::before,
+.inversion-card:hover::before,
+.aq-card:hover::before,
+.plume-map-card:hover::before,
+.forecast-map-card:hover::before,
+.forecast-chart-card:hover::before,
+.forecast-table-card:hover::before,
+.domain-cards-container:hover::before,
+.hero-card:hover::before,
+.horizon-compact-card:hover::before,
+.domain-card:hover::before,
+.sidebar-panel-card:hover::before {
+  opacity: 1;
+}
+
+/* 3. LEVEL 1: Primary KPI Cards (Strongest Elevation) */
+.card-kpi,
+.kpi-card,
+.inversion-kpi-card,
+.aq-kpi-card {
+  border-radius: 18px;
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level1);
+}
+
+.card-kpi:hover,
+.kpi-card:hover,
+.inversion-kpi-card:hover,
+.aq-kpi-card:hover {
+  transform: translateY(-3px) scale(1.006);
+  border-color: var(--border-card-hover);
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level1-hover);
+}
+
+/* 4. LEVEL 2: Content Cards (Maps, Tables, Charts, Main Modules) */
+.card-content,
+.card-premium,
+.glass-panel,
+.map-card,
+.table-card,
+.analytics-card,
+.live-map-card,
+.inversion-card,
+.aq-card,
+.plume-map-card,
+.forecast-map-card,
+.forecast-chart-card,
+.forecast-table-card,
+.domain-cards-container,
+.hero-card {
+  border-radius: 16px;
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level2);
+}
+
+.card-content:hover,
+.card-premium:hover,
+.glass-panel:hover,
+.map-card:hover,
+.table-card:hover,
+.analytics-card:hover,
+.live-map-card:hover,
+.inversion-card:hover,
+.aq-card:hover,
+.plume-map-card:hover,
+.forecast-map-card:hover,
+.forecast-chart-card:hover,
+.forecast-table-card:hover,
+.domain-cards-container:hover,
+.hero-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-card-hover);
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level2-hover);
+}
+
+/* 5. LEVEL 3: Small Cards (Forecast pills, Info cards, Secondary tiles) */
+.card-secondary,
+.horizon-compact-card,
+.domain-card,
+.inversion-date-card,
+.aq-source-card,
+.sidebar-panel-card,
+.forecast-station-selector-card,
+.empty-state {
+  border-radius: 14px;
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level3);
+}
+
+.card-secondary:hover,
+.horizon-compact-card:hover,
+.domain-card:hover,
+.inversion-date-card:hover,
+.aq-source-card:hover,
+.sidebar-panel-card:hover,
+.forecast-station-selector-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-card-hover);
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level3-hover);
+}
+
+/* 6. Click / Active Pressed State */
+.card-interactive:active,
+.card-base:active,
+.glass-panel:active,
+.card-premium:active,
+.card-content:active,
+.card-kpi:active,
+.card-secondary:active,
+.kpi-card:active,
+.inversion-kpi-card:active,
+.aq-kpi-card:active,
+.analytics-card:active,
+.horizon-compact-card:active,
+.domain-card:active {
+  transform: translateY(1px) scale(0.995);
+  box-shadow: var(--card-top-highlight), var(--shadow-card-active);
+  transition: transform 140ms ease-out, box-shadow 140ms ease-out;
+}
+
+/* 7. Keyboard Accessibility Focus Rings */
+.card-interactive:focus-visible,
+.domain-card:focus-visible,
+.horizon-compact-card:focus-visible,
+.map-tab-btn:focus-visible,
+.icon-btn:focus-visible,
+.theme-toggle-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--card-focus-ring), var(--shadow-card-level2);
+  border-color: var(--border-active);
+}
+
+/* 8. KPI Colored Ambient Glow Variants */
+.kpi-glow-rose,
+.kpi-card-rose {
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level1), var(--glow-rose);
+}
+.kpi-glow-rose:hover,
+.kpi-card-rose:hover {
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level1-hover), 0 0 24px 0px rgba(225, 29, 72, 0.16);
+  border-color: rgba(225, 29, 72, 0.32);
+}
+
+.kpi-glow-cyan,
+.kpi-card-cyan {
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level1), var(--glow-cyan);
+}
+.kpi-glow-cyan:hover,
+.kpi-card-cyan:hover {
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level1-hover), 0 0 24px 0px rgba(2, 132, 199, 0.20);
+  border-color: rgba(2, 132, 199, 0.35);
+}
+
+.kpi-glow-emerald,
+.kpi-card-emerald {
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level1), var(--glow-emerald);
+}
+.kpi-glow-emerald:hover,
+.kpi-card-emerald:hover {
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level1-hover), 0 0 24px 0px rgba(5, 150, 105, 0.16);
+  border-color: rgba(5, 150, 105, 0.32);
+}
+
+.kpi-glow-purple,
+.kpi-card-purple {
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level1), var(--glow-purple);
+}
+.kpi-glow-purple:hover,
+.kpi-card-purple:hover {
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level1-hover), 0 0 24px 0px rgba(99, 102, 241, 0.18);
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+.kpi-glow-amber,
+.kpi-card-amber {
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level1), var(--glow-amber);
+}
+.kpi-glow-amber:hover,
+.kpi-card-amber:hover {
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level1-hover), 0 0 24px 0px rgba(217, 119, 6, 0.18);
+  border-color: rgba(217, 119, 6, 0.32);
+}
+
+/* 9. KPI Squircle Icon Container System */
+.kpi-title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.kpi-icon-squircle {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(230, 245, 255, 0.90);
+  border: 1px solid rgba(80, 160, 230, 0.18);
+  box-shadow: 0 4px 12px rgba(50, 120, 180, 0.08);
+  flex-shrink: 0;
+  transition: background 180ms ease, box-shadow 180ms ease, border-color 180ms ease, filter 180ms ease;
+}
+
+.kpi-icon-squircle svg {
+  transition: transform 180ms ease;
+}
+
+.kpi-card:hover .kpi-icon-squircle,
+.inversion-kpi-card:hover .kpi-icon-squircle,
+.aq-kpi-card:hover .kpi-icon-squircle {
+  filter: brightness(1.06);
+  box-shadow: 0 6px 14px rgba(50, 120, 180, 0.14);
+}
+
+.kpi-card:hover .kpi-icon-squircle svg,
+.inversion-kpi-card:hover .kpi-icon-squircle svg,
+.aq-kpi-card:hover .kpi-icon-squircle svg {
+  transform: scale(1.05);
+}
+
+.kpi-icon-rose {
+  background: rgba(254, 242, 242, 0.95);
+  border-color: rgba(244, 63, 94, 0.22);
+  color: #e11d48;
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.10);
+}
+.kpi-icon-cyan {
+  background: rgba(240, 249, 255, 0.95);
+  border-color: rgba(2, 132, 199, 0.22);
+  color: #0284c7;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.10);
+}
+.kpi-icon-emerald {
+  background: rgba(236, 253, 245, 0.95);
+  border-color: rgba(16, 185, 129, 0.22);
+  color: #059669;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.10);
+}
+.kpi-icon-purple {
+  background: rgba(245, 243, 255, 0.95);
+  border-color: rgba(99, 102, 241, 0.22);
+  color: #4f46e5;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.10);
+}
+.kpi-icon-amber {
+  background: rgba(255, 251, 235, 0.95);
+  border-color: rgba(245, 158, 11, 0.22);
+  color: #d97706;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.10);
+}
+
+[data-theme="dark"] .kpi-icon-rose {
+  background: rgba(225, 29, 72, 0.16);
+  border-color: rgba(225, 29, 72, 0.35);
+  color: #fb7185;
+}
+[data-theme="dark"] .kpi-icon-cyan {
+  background: rgba(2, 132, 199, 0.16);
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+}
+[data-theme="dark"] .kpi-icon-emerald {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(52, 211, 153, 0.35);
+  color: #34d399;
+}
+[data-theme="dark"] .kpi-icon-purple {
+  background: rgba(99, 102, 241, 0.16);
+  border-color: rgba(129, 140, 248, 0.35);
+  color: #818cf8;
+}
+[data-theme="dark"] .kpi-icon-amber {
+  background: rgba(245, 158, 11, 0.16);
+  border-color: rgba(251, 191, 36, 0.35);
+  color: #fbbf24;
+}
+
+/* 10. Sparkline & Mini Chart Hover Enhancement */
+.kpi-sparkline-wrap svg,
+.kpi-card svg.sparkline,
+.aq-kpi-card svg,
+.inversion-kpi-card svg,
+.analytics-card svg {
+  opacity: 0.82;
+  transition: opacity 200ms ease, filter 200ms ease;
+}
+
+.kpi-sparkline-wrap svg path,
+.aq-kpi-card svg path,
+.inversion-kpi-card svg path,
+.analytics-card svg path {
+  transition: stroke-width 200ms ease, opacity 200ms ease;
+}
+
+.kpi-card:hover .kpi-sparkline-wrap svg,
+.aq-kpi-card:hover svg,
+.inversion-kpi-card:hover .kpi-sparkline-wrap svg,
+.analytics-card:hover svg {
+  opacity: 1;
+  filter: drop-shadow(0 2px 4px rgba(2, 132, 199, 0.15));
+}
+
+.kpi-card:hover .kpi-sparkline-wrap svg path[stroke],
+.aq-kpi-card:hover svg path[stroke],
+.inversion-kpi-card:hover .kpi-sparkline-wrap svg path[stroke],
+.analytics-card:hover svg path[stroke] {
+  stroke-width: 2.75px;
+}
+
+/* 11. KPI Major Value Subtle Emphasis */
+.kpi-value,
+.kpi-card-val {
+  transition: filter 200ms ease, text-shadow 200ms ease;
+}
+
+.kpi-card:hover .kpi-value,
+.inversion-kpi-card:hover .kpi-card-val,
+.aq-kpi-card:hover .kpi-card-val {
+  filter: brightness(1.05);
+  text-shadow: 0 1px 2px rgba(2, 132, 199, 0.10);
+}
+
+/* 12. Clickable Card Indicator */
+.card-action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 180ms ease;
+}
+
+.card-action-indicator {
+  display: inline-block;
+  opacity: 0.55;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.analytics-card:hover .card-action-indicator,
+.card-interactive:hover .card-action-indicator,
+.card-action-link:hover .card-action-indicator {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* 13. Scientific Visual Accents */
+.scientific-accent-blue {
+  border-left: 3px solid #0284c7;
+}
+.scientific-accent-orange {
+  border-left: 3px solid #ea580c;
+}
+.scientific-accent-red {
+  border-left: 3px solid #e11d48;
+}
+.scientific-accent-green {
+  border-left: 3px solid #059669;
+}
+.scientific-accent-purple {
+  border-left: 3px solid #6366f1;
+}
+
+/* 14. Static and Legacy Glass Panel support */
+.glass-card-static {
   background: var(--bg-card);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--border-card);
-  border-radius: 14px;
-  box-shadow: var(--shadow-card);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 16px;
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level2);
+  position: relative;
+  overflow: hidden;
 }
 
-.glass-panel:hover {
-  border-color: var(--border-active);
-  box-shadow: var(--shadow-md);
+/* 15. Reduced Motion & Mobile Responsiveness */
+@media (prefers-reduced-motion: reduce) {
+  .card-base,
+  .glass-panel,
+  .card-premium,
+  .card-content,
+  .card-kpi,
+  .card-secondary,
+  .kpi-card,
+  .inversion-kpi-card,
+  .aq-kpi-card,
+  .map-card,
+  .table-card,
+  .analytics-card,
+  .live-map-card,
+  .inversion-card,
+  .aq-card,
+  .plume-map-card,
+  .forecast-map-card,
+  .forecast-chart-card,
+  .forecast-table-card,
+  .domain-card,
+  .horizon-compact-card {
+    transition: none !important;
+    transform: none !important;
+  }
+  .kpi-icon-squircle svg {
+    transform: none !important;
+  }
 }
 
-.glass-card-static {
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-card);
-  border-radius: 14px;
-  box-shadow: var(--shadow-card);
+@media (hover: none) {
+  .card-kpi:hover,
+  .kpi-card:hover,
+  .inversion-kpi-card:hover,
+  .aq-kpi-card:hover,
+  .card-content:hover,
+  .card-premium:hover,
+  .glass-panel:hover,
+  .map-card:hover,
+  .table-card:hover,
+  .analytics-card:hover,
+  .live-map-card:hover,
+  .inversion-card:hover,
+  .aq-card:hover,
+  .plume-map-card:hover,
+  .forecast-map-card:hover,
+  .forecast-chart-card:hover,
+  .forecast-table-card:hover,
+  .domain-card:hover,
+  .horizon-compact-card:hover {
+    transform: none;
+  }
 }
 
 /* AppShell Layout */
@@ -480,9 +1029,19 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 0.65rem;
   padding: 0.65rem 0.85rem;
-  border-radius: 10px;
-  background: var(--bg-card-hover);
-  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--card-bg-gradient), var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-card-level3);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.system-status-indicator:hover {
+  border-color: var(--card-border-hover);
+  box-shadow: var(--shadow-card-level3-hover);
+  transform: translateY(-1.5px);
 }
 
 .status-dot-pulse {
@@ -530,19 +1089,42 @@ h1, h2, h3, h4, h5, h6 {
 /* Hero Section */
 .hero-card {
   position: relative;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 2rem 2.25rem;
-  background: linear-gradient(135deg, rgba(240, 249, 255, 0.98) 0%, rgba(224, 242, 254, 0.92) 45%, rgba(204, 251, 241, 0.85) 100%);
+  background: linear-gradient(135deg, rgba(240, 249, 255, 0.96) 0%, rgba(224, 242, 254, 0.90) 45%, rgba(204, 251, 241, 0.85) 100%);
   border: 1px solid rgba(186, 230, 253, 0.7);
-  box-shadow: 0 4px 20px -2px rgba(2, 132, 199, 0.08);
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level2);
   overflow: hidden;
   margin-bottom: 1.5rem;
 }
 
 [data-theme="dark"] .hero-card {
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(12, 34, 64, 0.9) 100%);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(12, 34, 64, 0.90) 100%);
   border-color: rgba(56, 189, 248, 0.25);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level2);
+}
+
+.hero-capability-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.35rem 0.8rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-xs);
+  transition: all 180ms ease;
+}
+
+.hero-capability-pill:hover {
+  border-color: var(--border-card-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 .hero-backdrop-svg {
@@ -608,22 +1190,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .kpi-card {
   padding: 1.25rem 1.35rem;
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-card);
-  border-radius: 14px;
-  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.kpi-card:hover {
-  border-color: var(--accent-cyan);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .kpi-header {
@@ -674,10 +1243,6 @@ h1, h2, h3, h4, h5, h6 {
 /* Map Card */
 .map-card {
   padding: 1.25rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: 14px;
-  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
 }
@@ -795,10 +1360,6 @@ h1, h2, h3, h4, h5, h6 {
 /* Table Card */
 .table-card {
   padding: 1.25rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: 14px;
-  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
 }
@@ -813,19 +1374,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .analytics-card {
   padding: 1.25rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: 14px;
-  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.analytics-card:hover {
-  border-color: var(--accent-cyan);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .analytics-card-header {
@@ -854,7 +1404,12 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.03em;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.45);
   transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .badge {
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .badge-info {
@@ -887,11 +1442,13 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--badge-neutral-border);
 }
 
-/* Data Table */
+/* Data Table Container & Rows */
 .data-table-container {
   overflow-x: auto;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card-level3);
 }
 
 .data-table {
@@ -902,7 +1459,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .data-table th {
-  padding: 0.55rem 0.65rem;
+  padding: 0.65rem 0.75rem;
   background-color: var(--table-header-bg);
   color: var(--text-secondary);
   font-weight: 700;
@@ -914,14 +1471,29 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .data-table td {
-  padding: 0.55rem 0.65rem;
+  padding: 0.65rem 0.75rem;
   border-bottom: 1px solid var(--border-subtle);
   color: var(--text-primary);
-  background: var(--bg-card-solid);
+  background: transparent;
+  transition: background-color 150ms ease;
 }
 
 .data-table tr:hover td {
   background-color: var(--table-row-hover);
+}
+
+[data-theme="dark"] .data-table tr:hover td {
+  background-color: rgba(56, 189, 248, 0.05);
+}
+
+.data-table tr.selected td,
+.data-table tr.active td {
+  background-color: rgba(2, 132, 199, 0.07);
+}
+
+.data-table tr.selected td:first-child,
+.data-table tr.active td:first-child {
+  box-shadow: inset 3px 0 0 #0284c7;
 }
 
 /* Theme Toggle Button */
@@ -1096,10 +1668,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .live-map-card {
   padding: 1.25rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: 16px;
-  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
 }
@@ -1266,10 +1834,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-panel-card {
   padding: 1.25rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: 16px;
-  box-shadow: var(--shadow-card);
 }
 
 .panel-title {
@@ -1474,22 +2038,10 @@ input:checked + .slider-round:before {
 }
 
 .aq-kpi-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: 16px;
   padding: 1.25rem;
-  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.aq-kpi-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
 }
 
 /* Main Two Column Row (Map + Time Series) */
@@ -1506,11 +2058,7 @@ input:checked + .slider-round:before {
 }
 
 .aq-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: 16px;
   padding: 1.25rem;
-  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
 }
@@ -1744,23 +2292,10 @@ input:checked + .slider-round:before {
 }
 
 .inversion-kpi-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-card);
-  border-radius: 16px;
-  box-shadow: var(--shadow-card);
   padding: 1.25rem 1.35rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.inversion-kpi-card:hover {
-  border-color: var(--accent-cyan);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .kpi-header-row {
@@ -1817,12 +2352,6 @@ input:checked + .slider-round:before {
 }
 
 .inversion-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-card);
-  border-radius: 16px;
-  box-shadow: var(--shadow-card);
   padding: 1.35rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -2380,11 +2909,7 @@ input:checked + .slider-round:before {
 }
 
 .forecast-station-selector-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: 14px;
   padding: 0.85rem 1.25rem;
-  box-shadow: var(--shadow-xs);
   display: flex;
   align-items: center;
   gap: 1.25rem;
@@ -2545,26 +3070,21 @@ input:checked + .slider-round:before {
 }
 
 .horizon-compact-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: 12px;
-  padding: 12px;
-  box-shadow: var(--shadow-xs);
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  transition: all 0.2s ease;
 }
 
 .horizon-compact-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
-  border-color: var(--brand-blue);
+  transform: translateY(-3px);
+  box-shadow: var(--card-top-highlight), var(--shadow-card-level3-hover), 0 0 14px rgba(2, 132, 199, 0.12);
+  border-color: rgba(30, 140, 220, 0.35);
 }
 
 .horizon-compact-card.active {
   border-color: #0284c7;
-  box-shadow: 0 0 12px rgba(2, 132, 199, 0.18);
+  box-shadow: var(--card-top-highlight), 0 0 0 2px rgba(2, 132, 199, 0.22), var(--shadow-card-level3-hover);
 }
 
 .horizon-card-lead {

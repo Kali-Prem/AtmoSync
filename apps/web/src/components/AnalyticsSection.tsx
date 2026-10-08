@@ -246,9 +246,9 @@ export default function AnalyticsSection({
           </span>
           <Link
             href="/forecast?station=DL_ANAND_VIHAR"
-            style={{ color: 'var(--accent-cyan)', textDecoration: 'none', fontWeight: 600 }}
+            className="card-action-link"
           >
-            Inspect &rarr;
+            Inspect <span className="card-action-indicator">&rarr;</span>
           </Link>
         </div>
       </div>
@@ -333,9 +333,9 @@ export default function AnalyticsSection({
           <span style={{ color: 'var(--text-muted)' }}>Horizons: +1h to +72h</span>
           <Link
             href="/forecast?station=DL_ANAND_VIHAR"
-            style={{ color: 'var(--accent-cyan)', textDecoration: 'none', fontWeight: 600 }}
+            className="card-action-link"
           >
-            All Horizons &rarr;
+            All Horizons <span className="card-action-indicator">&rarr;</span>
           </Link>
         </div>
       </div>
@@ -419,9 +419,9 @@ export default function AnalyticsSection({
           <span style={{ color: 'var(--text-muted)' }}>Lapse: {lapse} &deg;C/100m</span>
           <Link
             href="/inversion"
-            style={{ color: 'var(--accent-cyan)', textDecoration: 'none', fontWeight: 600 }}
+            className="card-action-link"
           >
-            Sounding &rarr;
+            Sounding <span className="card-action-indicator">&rarr;</span>
           </Link>
         </div>
       </div>
@@ -503,9 +503,9 @@ export default function AnalyticsSection({
           <span style={{ color: 'var(--text-muted)' }}>Plume Dispersion</span>
           <Link
             href="/plume"
-            style={{ color: 'var(--accent-cyan)', textDecoration: 'none', fontWeight: 600 }}
+            className="card-action-link"
           >
-            Plume Map &rarr;
+            Plume Map <span className="card-action-indicator">&rarr;</span>
           </Link>
         </div>
       </div>

@@ -620,10 +620,17 @@ export default function PlumeDashboard({
       {/* ---------------------------------------------------- */}
       <div className="inversion-kpi-grid">
         {/* CARD 1 — PLUME RISK SCORE */}
-        <div className="inversion-kpi-card">
+        <div className="inversion-kpi-card card-kpi kpi-glow-rose">
           <div>
             <div className="kpi-header-row">
-              <span className="kpi-card-title">PLUME RISK SCORE</span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-rose" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+                  </svg>
+                </div>
+                <span className="kpi-card-title">PLUME RISK SCORE</span>
+              </div>
               <span className={`badge ${level === 'SEVERE' || level === 'HIGH' ? 'badge-danger' : level === 'MODERATE' ? 'badge-warning' : 'badge-success'}`}>
                 {level} RISK
               </span>
@@ -658,10 +665,17 @@ export default function PlumeDashboard({
         </div>
 
         {/* CARD 2 — ACTIVE UPWIND FIRES */}
-        <div className="inversion-kpi-card">
+        <div className="inversion-kpi-card card-kpi kpi-glow-amber">
           <div>
             <div className="kpi-header-row">
-              <span className="kpi-card-title">ACTIVE UPWIND FIRES</span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-amber" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
+                </div>
+                <span className="kpi-card-title">ACTIVE UPWIND FIRES</span>
+              </div>
               <span className="badge badge-warning">
                 NW CORRIDOR
               </span>
@@ -698,10 +712,17 @@ export default function PlumeDashboard({
         </div>
 
         {/* CARD 3 — ESTIMATED PM2.5 EMISSION FLUX */}
-        <div className="inversion-kpi-card">
+        <div className="inversion-kpi-card card-kpi kpi-glow-cyan">
           <div>
             <div className="kpi-header-row">
-              <span className="kpi-card-title">ESTIMATED PM2.5 EMISSION FLUX</span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-cyan" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+                  </svg>
+                </div>
+                <span className="kpi-card-title">ESTIMATED PM2.5 EMISSION FLUX</span>
+              </div>
               <span className="badge badge-info">
                 WOOSTER FRE
               </span>
@@ -736,10 +757,19 @@ export default function PlumeDashboard({
         </div>
 
         {/* CARD 4 — STEERING WIND VECTOR */}
-        <div className="inversion-kpi-card">
+        <div className="inversion-kpi-card card-kpi kpi-glow-purple">
           <div>
             <div className="kpi-header-row">
-              <span className="kpi-card-title">STEERING WIND VECTOR</span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-purple" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2" />
+                    <path d="M9.6 4.6A2 2 0 1 1 11 8H2" />
+                    <path d="M12.6 19.4A2 2 0 1 0 14 16H2" />
+                  </svg>
+                </div>
+                <span className="kpi-card-title">STEERING WIND VECTOR</span>
+              </div>
               <span className="badge badge-info">
                 ERA5 NWP
               </span>

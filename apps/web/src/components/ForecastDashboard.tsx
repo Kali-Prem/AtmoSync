@@ -749,10 +749,18 @@ export default function ForecastDashboard({
       {/* ---------------------------------------------------- */}
       <div className="inversion-kpi-grid">
         {/* CARD 1: STATION */}
-        <div className="inversion-kpi-card">
+        <div className="inversion-kpi-card card-kpi kpi-glow-cyan">
           <div className="kpi-card-content">
             <div className="kpi-header-row">
-              <span className="kpi-card-title">STATION</span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-cyan" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </div>
+                <span className="kpi-card-title">STATION</span>
+              </div>
               <span className="badge badge-info" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem' }}>
                 {activeForecast?.station_code || selectedStationCode}
               </span>
@@ -770,10 +778,18 @@ export default function ForecastDashboard({
         </div>
 
         {/* CARD 2: LATEST OBSERVED PM2.5 */}
-        <div className="inversion-kpi-card">
+        <div className="inversion-kpi-card card-kpi kpi-glow-rose">
           <div className="kpi-card-content">
             <div className="kpi-header-row">
-              <span className="kpi-card-title">LATEST OBSERVED PM2.5</span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-rose" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24" />
+                  </svg>
+                </div>
+                <span className="kpi-card-title">LATEST OBSERVED PM2.5</span>
+              </div>
               <span className="badge badge-success">Ground Anchor</span>
             </div>
             <div className="kpi-card-val" style={{ color: getPm25Color(latestPm25) }}>
@@ -802,10 +818,18 @@ export default function ForecastDashboard({
         </div>
 
         {/* CARD 3: FORECAST INITIALIZED */}
-        <div className="inversion-kpi-card">
+        <div className="inversion-kpi-card card-kpi kpi-glow-purple">
           <div className="kpi-card-content">
             <div className="kpi-header-row">
-              <span className="kpi-card-title">FORECAST INITIALIZED</span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-purple" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                </div>
+                <span className="kpi-card-title">FORECAST INITIALIZED</span>
+              </div>
               <span className="badge badge-neutral" style={{ fontSize: '0.68rem' }}>
                 UTC +5:30 IST
               </span>
@@ -821,10 +845,19 @@ export default function ForecastDashboard({
         </div>
 
         {/* CARD 4: MODELS ACTIVE */}
-        <div className="inversion-kpi-card">
+        <div className="inversion-kpi-card card-kpi kpi-glow-emerald">
           <div className="kpi-card-content">
             <div className="kpi-header-row">
-              <span className="kpi-card-title">MODELS ACTIVE</span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-emerald" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2" />
+                    <path d="M9 9h6v6H9z" />
+                    <path d="M15 2v2M9 2v2M20 9h2M20 14h2M2 9h2M2 14h2M15 20v2M9 20v2" />
+                  </svg>
+                </div>
+                <span className="kpi-card-title">MODELS ACTIVE</span>
+              </div>
               <span className="badge badge-info">7 Horizons</span>
             </div>
             <div className="kpi-card-val" style={{ fontSize: '1.25rem', color: '#0284c7' }}>

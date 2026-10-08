@@ -653,17 +653,25 @@ export default function AirQualityDashboard({
       {/* ---------------------------------------------------- */}
       <div className="aq-kpi-grid">
         {/* KPI 1: Delhi NCR Mean PM2.5 */}
-        <div className="aq-kpi-card">
+        <div className="aq-kpi-card card-kpi kpi-glow-emerald">
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
-                Delhi NCR Mean PM2.5
-              </span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-emerald" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2a10 10 0 1 0 10 10H12V2z" />
+                    <path d="M12 12L2.5 7.5" />
+                  </svg>
+                </div>
+                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+                  Delhi NCR Mean PM2.5
+                </span>
+              </div>
               <span className={`badge ${naqiInfo.badgeClass}`} style={{ fontSize: '0.7rem' }}>
                 {naqiInfo.label}
               </span>
             </div>
-            <div style={{ fontSize: '2.1rem', fontWeight: 800, color: naqiInfo.color, marginTop: '0.35rem' }}>
+            <div className="kpi-card-val" style={{ fontSize: '2.1rem', fontWeight: 800, color: naqiInfo.color, marginTop: '0.35rem' }}>
               {meanPm25} <span style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-muted)' }}>µg/m³</span>
             </div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
@@ -672,7 +680,7 @@ export default function AirQualityDashboard({
           </div>
 
           {/* Mini Sparkline */}
-          <div style={{ marginTop: '0.75rem', paddingTop: '0.5rem', borderTop: '1px solid var(--border-subtle)' }}>
+          <div className="kpi-sparkline-wrap" style={{ marginTop: '0.75rem', paddingTop: '0.5rem', borderTop: '1px solid var(--border-subtle)' }}>
             <svg viewBox="0 0 120 20" style={{ width: '100%', height: '20px' }}>
               <path
                 d="M 0 14 Q 30 8, 60 16 T 120 10"
@@ -685,17 +693,24 @@ export default function AirQualityDashboard({
         </div>
 
         {/* KPI 2: Planetary Boundary Layer Height */}
-        <div className="aq-kpi-card">
+        <div className="aq-kpi-card card-kpi kpi-glow-amber">
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
-                Planetary Boundary Layer Height
-              </span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-amber" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                </div>
+                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+                  Planetary Boundary Layer Height
+                </span>
+              </div>
               <span className="badge badge-warning" style={{ fontSize: '0.7rem' }}>
                 Shallow Layer
               </span>
             </div>
-            <div style={{ fontSize: '2.1rem', fontWeight: 800, color: '#d97706', marginTop: '0.35rem' }}>
+            <div className="kpi-card-val" style={{ fontSize: '2.1rem', fontWeight: 800, color: '#d97706', marginTop: '0.35rem' }}>
               {pblHeight} <span style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-muted)' }}>m</span>
             </div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
@@ -709,17 +724,24 @@ export default function AirQualityDashboard({
         </div>
 
         {/* KPI 3: Ventilation Index */}
-        <div className="aq-kpi-card">
+        <div className="aq-kpi-card card-kpi kpi-glow-cyan">
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
-                Ventilation Index (VI)
-              </span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-cyan" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2" />
+                  </svg>
+                </div>
+                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+                  Ventilation Index (VI)
+                </span>
+              </div>
               <span className={`badge ${ventilationIndex < 2000 ? 'badge-danger' : 'badge-success'}`} style={{ fontSize: '0.7rem' }}>
                 {ventilationIndex < 2000 ? 'Poor Dispersion' : 'Adequate'}
               </span>
             </div>
-            <div style={{ fontSize: '2.1rem', fontWeight: 800, color: ventilationIndex < 2000 ? '#dc2626' : '#059669', marginTop: '0.35rem' }}>
+            <div className="kpi-card-val" style={{ fontSize: '2.1rem', fontWeight: 800, color: ventilationIndex < 2000 ? '#dc2626' : '#059669', marginTop: '0.35rem' }}>
               {ventilationIndex} <span style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-muted)' }}>m²/s</span>
             </div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
@@ -733,17 +755,26 @@ export default function AirQualityDashboard({
         </div>
 
         {/* KPI 4: Air Quality Status */}
-        <div className="aq-kpi-card">
+        <div className="aq-kpi-card card-kpi kpi-glow-rose">
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
-                Air Quality Status
-              </span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-rose" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                </div>
+                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+                  Air Quality Status
+                </span>
+              </div>
               <span className="badge badge-danger" style={{ fontSize: '0.7rem' }}>
                 High Risk
               </span>
             </div>
-            <div style={{ fontSize: '2.1rem', fontWeight: 800, color: isStagnant ? '#ea580c' : '#059669', marginTop: '0.35rem' }}>
+            <div className="kpi-card-val" style={{ fontSize: '2.1rem', fontWeight: 800, color: isStagnant ? '#ea580c' : '#059669', marginTop: '0.35rem' }}>
               {isStagnant ? 'STAGNANT' : 'VENTILATED'}
             </div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>

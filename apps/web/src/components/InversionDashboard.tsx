@@ -404,10 +404,17 @@ export default function InversionDashboard({
       {/* ---------------------------------------------------- */}
       <div className="inversion-kpi-grid">
         {/* CARD 1: Trapping Severity Index */}
-        <div className="inversion-kpi-card">
+        <div className="inversion-kpi-card card-kpi kpi-glow-rose">
           <div>
             <div className="kpi-header-row">
-              <span className="kpi-card-title">TRAPPING SEVERITY INDEX</span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-rose" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                  </svg>
+                </div>
+                <span className="kpi-card-title">TRAPPING SEVERITY INDEX</span>
+              </div>
               <span className={`badge ${itsi >= 70 ? 'badge-danger' : itsi >= 40 ? 'badge-warning' : 'badge-success'}`}>
                 {itsi >= 70 ? 'SEVERE TRAPPING' : itsi >= 40 ? 'MODERATE TRAPPING' : 'FAVORABLE DISPERSION'}
               </span>
@@ -443,10 +450,18 @@ export default function InversionDashboard({
         </div>
 
         {/* CARD 2: Near-Surface Lapse Rate */}
-        <div className="inversion-kpi-card">
+        <div className="inversion-kpi-card card-kpi kpi-glow-amber">
           <div>
             <div className="kpi-header-row">
-              <span className="kpi-card-title">NEAR-SURFACE LAPSE RATE</span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-amber" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
+                </div>
+                <span className="kpi-card-title">NEAR-SURFACE LAPSE RATE</span>
+              </div>
               <span className={`badge ${lapseRate > 0 ? 'badge-danger' : 'badge-success'}`}>
                 {lapseRate > 0 ? 'INVERSION ACTIVE' : 'UNSTABLE'}
               </span>
@@ -490,10 +505,17 @@ export default function InversionDashboard({
         </div>
 
         {/* CARD 3: Boundary Layer Height */}
-        <div className="inversion-kpi-card">
+        <div className="inversion-kpi-card card-kpi kpi-glow-cyan">
           <div>
             <div className="kpi-header-row">
-              <span className="kpi-card-title">BOUNDARY LAYER HEIGHT</span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-cyan" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                  </svg>
+                </div>
+                <span className="kpi-card-title">BOUNDARY LAYER HEIGHT</span>
+              </div>
               <span className="badge badge-warning">
                 CRITICAL STAGNATION
               </span>
@@ -537,10 +559,17 @@ export default function InversionDashboard({
         </div>
 
         {/* CARD 4: Atmospheric Stability */}
-        <div className="inversion-kpi-card">
+        <div className="inversion-kpi-card card-kpi kpi-glow-emerald">
           <div>
             <div className="kpi-header-row">
-              <span className="kpi-card-title">ATMOSPHERIC STABILITY</span>
+              <div className="kpi-title-with-icon">
+                <div className="kpi-icon-squircle kpi-icon-emerald" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M2 12h20M2 6h20M2 18h20" />
+                  </svg>
+                </div>
+                <span className="kpi-card-title">ATMOSPHERIC STABILITY</span>
+              </div>
               <span className="badge badge-warning">
                 STABLE
               </span>

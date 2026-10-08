@@ -22,7 +22,7 @@ export default async function StatusPage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
         {/* Service Meta */}
-        <div className="glass-panel" style={{ padding: '1.5rem' }}>
+        <div className="glass-panel card-content card-interactive" style={{ padding: '1.5rem' }}>
           <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--accent-cyan)' }}>Application Runtime</h3>
           <div style={{ fontSize: '0.88rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -45,7 +45,7 @@ export default async function StatusPage() {
         </div>
 
         {/* Database Status */}
-        <div className="glass-panel" style={{ padding: '1.5rem' }}>
+        <div className="glass-panel card-content card-interactive" style={{ padding: '1.5rem' }}>
           <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--accent-emerald)' }}>Database Persistence</h3>
           <div style={{ fontSize: '0.88rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -66,7 +66,7 @@ export default async function StatusPage() {
         </div>
 
         {/* External Ingestion Providers */}
-        <div className="glass-panel" style={{ padding: '1.5rem' }}>
+        <div className="glass-panel card-content card-interactive" style={{ padding: '1.5rem' }}>
           <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--accent-amber)' }}>Verified Ingestion Providers</h3>
           <div style={{ fontSize: '0.88rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
